@@ -5,17 +5,14 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      {/* HERO SECTION */}
-{/* HERO SECTION */}
-<section className="hero">
-  <img src={hero} alt="Wedding Hero" className="hero-img" />
-  <div className="hero-gradient" />
+      <section className="hero">
+        <img src={hero} alt="Wedding Hero" className="hero-img" />
+        <div className="hero-gradient" />
 
-  <div className="hero-content">
-    <div className="hero-card">
-      {/* IMPORTANT: remove tracking-wide here */}
-      <h1 className="font-orange hero-title hero-title-shadow">
-        #PERFECTLYDIVINE26
+        <div className="hero-content">
+          <div className="hero-card">
+            <h1 className="font-orange hero-title hero-title-shadow">
+              #PERFECTLYDIVINE26
       </h1>
 
       <p className="scripture font-playfair italic">

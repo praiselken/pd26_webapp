@@ -998,48 +998,83 @@ p {
 }
 
 /* =========================
-   HERO MOBILE FIX (paste at bottom)
+   HERO (FIXED + MOBILE SAFE)
+   Paste at BOTTOM of index.css
 ========================= */
 
 .hero {
   position: relative;
-  overflow: hidden; /* prevents sideways overflow on mobile */
+  min-height: 100vh;          /* IMPORTANT: gives the hero height */
+  width: 100%;
+  overflow: hidden;           /* prevents sideways overflow */
+  display: grid;
+  place-items: center;
 }
 
+/* Background image */
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Gradient overlay above image but below content */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* tune this if you want it darker/lighter */
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.25) 0%,
+    rgba(0,0,0,0.35) 35%,
+    rgba(0,0,0,0.55) 100%
+  );
+}
+
+/* Content wrapper above everything */
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 2;                 /* IMPORTANT: ensures text/buttons show */
   width: 100%;
   padding: 18px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  text-align: center;
 }
 
 .hero-card {
   width: min(920px, 100%);
-  margin: 0 auto;
-  text-align: center;
+  padding: clamp(16px, 4vw, 28px);
+  border-radius: 22px;
+
+  /* Luxury glass card */
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Force the hashtag to stay on ONE line and ALWAYS fit */
+/* ONE-LINE hero title that scales down on phones */
 .hero-title {
   white-space: nowrap;
   display: inline-block;
   max-width: 100%;
   line-height: 1.05;
 
-  /* shrink enough for phones */
-  font-size: clamp(1.05rem, 4.2vw, 4rem);
-
-  /* gentle tracking that won't cause overflow */
+  font-size: clamp(1.02rem, 4.2vw, 4rem);
   letter-spacing: clamp(0.01em, 0.18vw, 0.06em);
 }
 
-/* Scripture sizing that adapts */
+/* Scripture */
 .scripture {
   margin-top: 10px;
   font-size: clamp(0.95rem, 3.8vw, 1.15rem);
-  line-height: 1.5;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.92);
 }
 
 .scripture-ref {
@@ -1047,44 +1082,45 @@ p {
   margin-top: 6px;
 }
 
-/* Dates: keep elegant tracking but safe on mobile */
+/* Dates */
 .dates {
   margin-top: 14px;
   font-size: clamp(0.95rem, 3.6vw, 1.25rem);
   letter-spacing: clamp(0.12em, 1.2vw, 0.25em);
+  color: rgba(255,255,255,0.92);
 }
 
-/* CTA becomes a clean stack on mobile and 2 cols on larger screens */
+/* CTA buttons layout */
 .cta {
   margin-top: 18px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
   width: 100%;
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
-/* Make buttons fill the CTA grid nicely */
 .cta .btn {
   width: 100%;
 }
 
-/* On wider screens, make CTA 2 columns */
+/* 2 columns on larger screens */
 @media (min-width: 640px) {
   .cta {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Extra small phones: tighten a bit more */
+/* Extra small phones */
 @media (max-width: 380px) {
   .hero-content {
     padding: 14px;
   }
   .hero-title {
-    font-size: clamp(0.98rem, 4vw, 2rem);
+    font-size: clamp(0.95rem, 4vw, 2rem);
     letter-spacing: 0.02em;
   }
 }
