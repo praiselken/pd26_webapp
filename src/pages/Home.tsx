@@ -6,48 +6,55 @@ export default function Home() {
     <main>
       <Navbar />
       {/* HERO SECTION */}
-      <section className="hero">
-        <img src={hero} alt="Wedding Hero" className="hero-img" />
-        <div className="hero-gradient" />
+{/* HERO SECTION */}
+<section className="hero">
+  <img src={hero} alt="Wedding Hero" className="hero-img" />
+  <div className="hero-gradient" />
 
-        <div className="hero-content">
-          <div className="hero-card">
-            
-            <h1 className="font-orange hero-title tracking-wide hero-title-shadow">#PERFECTLYDIVINE26</h1>
-            <p className="scripture font-playfair italic text-lg">
-              “She is more precious than rubies; nothing you desire can compare
-              with her.” — <br /> Proverbs 3:15
-            </p>
+  <div className="hero-content">
+    <div className="hero-card">
+      {/* IMPORTANT: remove tracking-wide here */}
+      <h1 className="font-orange hero-title hero-title-shadow">
+        #PERFECTLYDIVINE26
+      </h1>
 
+      <p className="scripture font-playfair italic">
+        “She is more precious than rubies; nothing you desire can compare with her.”
+        <br />
+        <span className="scripture-ref">— Proverbs 3:15</span>
+      </p>
 
-            <p className="dates font-playfair text-xl tracking-[0.25em] uppercase"> 09.04.2026 &amp; 11.04.2026</p>
+      {/* IMPORTANT: remove tracking-[0.25em] here */}
+      <p className="dates font-playfair uppercase">
+        09.04.2026 &amp; 11.04.2026
+      </p>
 
-           <div className="cta">
-  <a href="#our-story" className="btn btn-outline">
-    <span>Our Story</span>
-  </a>
+      <div className="cta">
+        <a href="#our-story" className="btn btn-outline">
+          <span>Our Story</span>
+        </a>
 
-  <a href="/events" className="btn btn-outline">
-    <span>Events</span>
-  </a>
+        <a href="/events" className="btn btn-outline">
+          <span>Events</span>
+        </a>
 
-  <a href="/rsvp" className="btn btn-outline">
-    <span>RSVP</span>
-  </a>
+        <a href="/rsvp" className="btn btn-outline-dark">
+          <span>RSVP</span>
+        </a>
 
-  <a href="/livestream" className="btn btn-outline">
-    <span>Livestream</span>
-  </a>
-</div>
-          </div>
+        <a href="/livestream" className="btn btn-outline">
+          <span>Livestream</span>
+        </a>
+      </div>
+    </div>
 
-          {/* Scroll Indicator */}
-          <a href="#our-story" className="scroll-indicator" aria-label="Scroll">
-            <span className="scroll-mouse" aria-hidden="true" />
-            <span className="scroll-text">Scroll</span>
-          </a>
-        </div>
-      </section>
+    {/* Scroll Indicator */}
+    <a href="#our-story" className="scroll-indicator" aria-label="Scroll">
+      <span className="scroll-mouse" aria-hidden="true" />
+      <span className="scroll-text">Scroll</span>
+    </a>
+  </div>
+</section>
 
       {/* OUR STORY PREVIEW SECTION */}
       <section id="our-story" className="section">

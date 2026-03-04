@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.hero-title {
+  white-space: nowrap !important;
+  max-width: 100%;
+  display: inline-block;
+  text-align: center;
+
+  /* shrink more on mobile */
+  font-size: clamp(1.05rem, 4.2vw, 4rem) !important;
+
+  /* reduce width contribution from tracking */
+  letter-spacing: clamp(0.01em, 0.2vw, 0.06em) !important;
+
+  line-height: 1.05;
+}
+
 /* =========================
    GLOBAL RESET + THEME
    ========================= */
@@ -220,6 +235,8 @@ button:focus-visible {
   max-width: 100%;
   text-align: center;
 }
+
+
 
 .hero-title-shadow {
   text-shadow:
@@ -980,14 +997,94 @@ p {
   }
 }
 
-/* Upgrade grid on tablets/desktop */
-@media (min-width: 641px) {
-  .choice-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+/* =========================
+   HERO MOBILE FIX (paste at bottom)
+========================= */
+
+.hero {
+  position: relative;
+  overflow: hidden; /* prevents sideways overflow on mobile */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-card {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Force the hashtag to stay on ONE line and ALWAYS fit */
+.hero-title {
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  line-height: 1.05;
+
+  /* shrink enough for phones */
+  font-size: clamp(1.05rem, 4.2vw, 4rem);
+
+  /* gentle tracking that won't cause overflow */
+  letter-spacing: clamp(0.01em, 0.18vw, 0.06em);
+}
+
+/* Scripture sizing that adapts */
+.scripture {
+  margin-top: 10px;
+  font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.scripture-ref {
+  display: inline-block;
+  margin-top: 6px;
+}
+
+/* Dates: keep elegant tracking but safe on mobile */
+.dates {
+  margin-top: 14px;
+  font-size: clamp(0.95rem, 3.6vw, 1.25rem);
+  letter-spacing: clamp(0.12em, 1.2vw, 0.25em);
+}
+
+/* CTA becomes a clean stack on mobile and 2 cols on larger screens */
+.cta {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Make buttons fill the CTA grid nicely */
+.cta .btn {
+  width: 100%;
+}
+
+/* On wider screens, make CTA 2 columns */
+@media (min-width: 640px) {
+  .cta {
+    grid-template-columns: 1fr 1fr;
   }
 }
-@media (min-width: 900px) {
-  .choice-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+/* Extra small phones: tighten a bit more */
+@media (max-width: 380px) {
+  .hero-content {
+    padding: 14px;
+  }
+  .hero-title {
+    font-size: clamp(0.98rem, 4vw, 2rem);
+    letter-spacing: 0.02em;
   }
 }
