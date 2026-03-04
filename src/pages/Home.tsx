@@ -45,11 +45,6 @@ export default function Home() {
       </div>
     </div>
 
-    {/* Scroll Indicator */}
-    <a href="#our-story" className="scroll-indicator" aria-label="Scroll">
-      <span className="scroll-mouse" aria-hidden="true" />
-      <span className="scroll-text">Scroll</span>
-    </a>
   </div>
 </section>
 
