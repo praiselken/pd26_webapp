@@ -211,10 +211,14 @@ button:focus-visible {
 }
 
 .hero-card h1 {
-  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-size: clamp(1.2rem, 5vw, 4rem); /* allows smaller mobile scaling */
   line-height: 1.05;
-  letter-spacing: 1px;
+  letter-spacing: clamp(0.02em, 0.4vw, 0.08em);
   margin-bottom: 10px;
+
+  white-space: nowrap; /* keeps it on one line */
+  max-width: 100%;
+  text-align: center;
 }
 
 .hero-title-shadow {
