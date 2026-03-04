@@ -4,17 +4,9 @@ import Navbar from "../components/Navbar";
 import PasswordGate from "../components/PasswordGate";
 import bg from "../assets/hands.jpg";
 
-
-
 type DescribesYou = "" | "Family" | "Friends" | "Church Ministry" | "Campus Ministry";
 
-type ChurchRole =
-  | ""
-  | "Zonal Pastor"
-  | "Deacon"
-  | "Deaconess"
-  | "Sister"
-  | "Brother";
+type ChurchRole = "" | "Zonal Pastor" | "Deacon" | "Deaconess" | "Sister" | "Brother";
 
 type CampusRole =
   | ""
@@ -71,6 +63,31 @@ const fade = {
 
 const attendOptions: AttendOption[] = ["Yes", "No", "Will watch from afar"];
 
+const describesOptions: Exclude<DescribesYou, "">[] = [
+  "Family",
+  "Friends",
+  "Church Ministry",
+  "Campus Ministry",
+];
+
+const churchRoleOptions: Exclude<ChurchRole, "">[] = [
+  "Zonal Pastor",
+  "Deacon",
+  "Deaconess",
+  "Sister",
+  "Brother",
+];
+
+const campusRoleOptions: Exclude<CampusRole, "">[] = [
+  "Regional Secretary",
+  "Zonal Secretary",
+  "Group Pastor",
+  "Pastor",
+  "Coordinator",
+  "Sister",
+  "Brother",
+];
+
 export default function RSVP() {
   const [data, setData] = useState<FormState>({
     title: "",
@@ -91,7 +108,7 @@ export default function RSVP() {
   // Steps in required order, with conditional role step only once
   const steps: Step[] = useMemo(() => {
     const base: Step[] = [
-      { key: "nameBlock", label: "Details" }, // Title + Full Name together
+      { key: "nameBlock", label: "Details" },
       { key: "describesYou", label: "About You" },
     ];
 
@@ -122,7 +139,6 @@ export default function RSVP() {
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setData((prev) => {
-      // Reset roles if describesYou changes
       if (key === "describesYou") {
         const next = { ...prev, describesYou: value as DescribesYou };
         if (value !== "Church Ministry") next.churchRole = "";
@@ -141,13 +157,11 @@ export default function RSVP() {
     if (idx >= 0) setStep(idx);
   };
 
-
   const validateStep = (): { ok: boolean; message?: string } => {
     switch (current) {
       case "nameBlock":
         if (!data.title) return { ok: false, message: "Please select your title." };
-        if (!data.fullName.trim())
-          return { ok: false, message: "Please enter your full name." };
+        if (!data.fullName.trim()) return { ok: false, message: "Please enter your full name." };
         return { ok: true };
 
       case "describesYou":
@@ -202,7 +216,6 @@ export default function RSVP() {
         body: JSON.stringify(data),
       });
 
-      // With no-cors we can't read the response, so assume success if no error
       setSubmitted(true);
     } catch (err) {
       console.error("RSVP submit error:", err);
@@ -214,11 +227,11 @@ export default function RSVP() {
 
   return (
     <PasswordGate
-    heading="RSVP"
-    subheading="Please enter the invitation password to RSVP."
-    storageKey="pd26_rsvp_access"
-    password={import.meta.env.VITE_PD26_RSVP_PASSWORD}
-  >
+      heading="RSVP"
+      subheading="Please enter the invitation password to RSVP."
+      storageKey="pd26_rsvp_access"
+      password={import.meta.env.VITE_PD26_RSVP_PASSWORD}
+    >
       <>
         <Navbar />
 
@@ -306,15 +319,11 @@ export default function RSVP() {
                             <p className="rsvp-question">What best describes you?</p>
 
                             <div className="choice-grid">
-                              {(
-                                ["Family", "Friends", "Church Ministry", "Campus Ministry"] as const
-                              ).map((opt) => (
+                              {describesOptions.map((opt) => (
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${
-                                    data.describesYou === opt ? "selected" : ""
-                                  }`}
+                                  className={`choice-pill ${data.describesYou === opt ? "selected" : ""}`}
                                   onClick={() => {
                                     setField("describesYou", opt);
                                     setTimeout(() => handleNext(), 120);
@@ -328,47 +337,38 @@ export default function RSVP() {
                         )}
 
                         {current === "churchRole" && (
-  <>
-    <p className="rsvp-question">Church ministry — what role?</p>
+                          <>
+                            <p className="rsvp-question">Church ministry — what role?</p>
 
-    <div className="choice-grid">
-      {(["Zonal Pastor", "Deacon", "Deaconess", "Sister", "Brother"] as const).map(
-        (opt) => (
-          <button
-            type="button"
-            key={opt}
-            className={`choice-pill ${data.churchRole === opt ? "selected" : ""}`}
-            onClick={() => setField("churchRole", opt)}
-          >
-            {opt}
-          </button>
-        )
-      )}
-    </div>
-  </>
-)}
+                            <div className="choice-grid">
+                              {churchRoleOptions.map((opt) => (
+                                <button
+                                  type="button"
+                                  key={opt}
+                                  className={`choice-pill ${data.churchRole === opt ? "selected" : ""}`}
+                                  onClick={() => setField("churchRole", opt)}
+                                >
+                                  {opt}
+                                </button>
+                              ))}
+                            </div>
+                          </>
+                        )}
 
                         {current === "campusRole" && (
                           <>
                             <p className="rsvp-question">Campus ministry — what role?</p>
-                            <div className="tick-list">
-                              {(
-                                [
-                                  "Regional Secretary",
-                                  "Zonal Secretary",
-                                  "Group Pastor",
-                                  "Pastor",
-                                  "Coordinator",
-                                  "Sister",
-                                  "Brother",
-                                ] as const
-                              ).map((opt) => (
-                                <TickChoice
+
+                            <div className="choice-grid">
+                              {campusRoleOptions.map((opt) => (
+                                <button
+                                  type="button"
                                   key={opt}
-                                  label={opt}
-                                  selected={data.campusRole === opt}
-                                  onSelect={() => setField("campusRole", opt)}
-                                />
+                                  className={`choice-pill ${data.campusRole === opt ? "selected" : ""}`}
+                                  onClick={() => setField("campusRole", opt)}
+                                >
+                                  {opt}
+                                </button>
                               ))}
                             </div>
                           </>
@@ -392,17 +392,13 @@ export default function RSVP() {
 
                         {current === "traditional" && (
                           <>
-                            <p className="rsvp-question">
-                              Are you attending the traditional wedding?
-                            </p>
+                            <p className="rsvp-question">Are you attending the traditional wedding?</p>
                             <div className="choice-grid">
                               {attendOptions.map((opt) => (
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${
-                                    data.traditional === opt ? "selected" : ""
-                                  }`}
+                                  className={`choice-pill ${data.traditional === opt ? "selected" : ""}`}
                                   onClick={() => setField("traditional", opt)}
                                 >
                                   {opt}
@@ -420,9 +416,7 @@ export default function RSVP() {
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${
-                                    data.white === opt ? "selected" : ""
-                                  }`}
+                                  className={`choice-pill ${data.white === opt ? "selected" : ""}`}
                                   onClick={() => setField("white", opt)}
                                 >
                                   {opt}
@@ -437,16 +431,8 @@ export default function RSVP() {
                             <p className="rsvp-question">Review your RSVP</p>
 
                             <div className="review-box font-playfair">
-                              <ReviewRow
-                                label="Title"
-                                value={data.title}
-                                onEdit={() => jumpTo("nameBlock")}
-                              />
-                              <ReviewRow
-                                label="Full Name"
-                                value={data.fullName}
-                                onEdit={() => jumpTo("nameBlock")}
-                              />
+                              <ReviewRow label="Title" value={data.title} onEdit={() => jumpTo("nameBlock")} />
+                              <ReviewRow label="Full Name" value={data.fullName} onEdit={() => jumpTo("nameBlock")} />
                               <ReviewRow
                                 label="Describes You"
                                 value={data.describesYou}
@@ -469,23 +455,13 @@ export default function RSVP() {
                                 />
                               )}
 
-                              <ReviewRow
-                                label="Email"
-                                value={data.email}
-                                onEdit={() => jumpTo("email")}
-                              />
-
+                              <ReviewRow label="Email" value={data.email} onEdit={() => jumpTo("email")} />
                               <ReviewRow
                                 label="Traditional Wedding"
                                 value={data.traditional}
                                 onEdit={() => jumpTo("traditional")}
                               />
-
-                              <ReviewRow
-                                label="White Wedding"
-                                value={data.white}
-                                onEdit={() => jumpTo("white")}
-                              />
+                              <ReviewRow label="White Wedding" value={data.white} onEdit={() => jumpTo("white")} />
                             </div>
 
                             <button
