@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import bg from "../assets/hands.jpg";
