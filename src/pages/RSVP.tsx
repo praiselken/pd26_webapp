@@ -141,25 +141,6 @@ export default function RSVP() {
     if (idx >= 0) setStep(idx);
   };
 
-  // Tick-box style single-select
-  const TickChoice = ({
-    label,
-    selected,
-    onSelect,
-  }: {
-    label: string;
-    selected: boolean;
-    onSelect: () => void;
-  }) => (
-    <button
-      type="button"
-      className={`tick-row ${selected ? "selected" : ""}`}
-      onClick={onSelect}
-    >
-      <span className={`tick-box ${selected ? "checked" : ""}`} aria-hidden="true" />
-      <span className="tick-label">{label}</span>
-    </button>
-  );
 
   const validateStep = (): { ok: boolean; message?: string } => {
     switch (current) {
@@ -368,33 +349,30 @@ export default function RSVP() {
 )}
 
                         {current === "campusRole" && (
-  <>
-    <p className="rsvp-question">Campus ministry — what role?</p>
-
-    <div className="choice-grid">
-      {(
-        [
-          "Regional Secretary",
-          "Zonal Secretary",
-          "Group Pastor",
-          "Pastor",
-          "Coordinator",
-          "Sister",
-          "Brother",
-        ] as const
-      ).map((opt) => (
-        <button
-          type="button"
-          key={opt}
-          className={`choice-pill ${data.campusRole === opt ? "selected" : ""}`}
-          onClick={() => setField("campusRole", opt)}
-        >
-          {opt}
-        </button>
-      ))}
-    </div>
-  </>
-)}
+                          <>
+                            <p className="rsvp-question">Campus ministry — what role?</p>
+                            <div className="tick-list">
+                              {(
+                                [
+                                  "Regional Secretary",
+                                  "Zonal Secretary",
+                                  "Group Pastor",
+                                  "Pastor",
+                                  "Coordinator",
+                                  "Sister",
+                                  "Brother",
+                                ] as const
+                              ).map((opt) => (
+                                <TickChoice
+                                  key={opt}
+                                  label={opt}
+                                  selected={data.campusRole === opt}
+                                  onSelect={() => setField("campusRole", opt)}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
 
                         {current === "email" && (
                           <>
