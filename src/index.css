@@ -196,6 +196,11 @@ button:focus-visible {
   text-align: center;
 }
 
+.hero-title {
+  font-size: clamp(1.8rem, 6vw, 6rem);
+  white-space: nowrap; /* keeps it on one line */
+}
+
 /* Slight “card” feel without blocking the image */
 .hero-card {
   max-width: 760px;
@@ -861,3 +866,124 @@ button:focus-visible {
 .review-label { font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; color: rgba(33,26,29,0.55); }
 .review-value { color: rgba(33,26,29,0.85); margin-top:2px; }
 .review-edit { background: transparent; border:1px solid rgba(33,26,29,0.12); border-radius:999px; padding:10px 14px; font-size:0.85rem; }
+
+/* =========================
+   MOBILE RESPONSIVE PATCH
+   Paste at bottom of index.css
+========================= */
+
+/* Ensure everything sizes correctly on mobile */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Images never overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make long headings wrap instead of overflowing */
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* --- RSVP layout fixes --- */
+.rsvp-container {
+  padding: 16px;
+}
+
+.rsvp-card {
+  width: 100%;
+  max-width: 560px; /* desktop cap */
+  margin: 0 auto;
+}
+
+/* Inputs/buttons should fill available space */
+.form-input,
+.password-input {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Button groups should wrap nicely */
+.cta,
+.rsvp-nav,
+.choice-grid {
+  flex-wrap: wrap;
+}
+
+/* Choice pills: 2 columns on phone, 3+ on larger screens */
+.choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.choice-pill {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Buttons: full width on phone for a luxury, tappable feel */
+@media (max-width: 640px) {
+  .btn,
+  .btn-outline,
+  .btn-outline-dark,
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .rsvp-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Make RSVP card spacing nicer */
+  .rsvp-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  /* Smaller hero text + no overflow */
+  .hero-card h1,
+  .rsvp-card h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: 0.06em;
+  }
+
+  /* CTA stack */
+  .cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Reduce overly wide tracking that causes overflow */
+  .dates {
+    letter-spacing: 0.12em !important;
+    text-align: center;
+  }
+}
+
+/* Upgrade grid on tablets/desktop */
+@media (min-width: 641px) {
+  .choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .choice-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
