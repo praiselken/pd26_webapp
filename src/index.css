@@ -212,6 +212,13 @@ button:focus-visible {
   margin-bottom: 10px;
 }
 
+.hero-title-shadow {
+  text-shadow:
+    0 3px 6px rgba(0,0,0,0.4),
+    0 10px 30px rgba(0,0,0,0.3),
+    0 0 18px rgba(255,255,255,0.08);
+}
+
 .scripture {
   font-style: italic;
   color: rgba(255, 255, 255, 0.92);
@@ -261,20 +268,102 @@ button:focus-visible {
 
 /* hover = still transparent; slightly deeper champagne */
 .btn-outline:hover {
-  color: rgba(200, 169, 106, 0.85);
-  border-color: rgba(200, 169, 106, 0.85);
-  opacity: 1; /* stops your global a:hover from fading it */
+  background: rgba(200, 169, 106, 0.9); /* champagne fill */
+  color: white;
+  border-color: rgba(200, 169, 106, 0.9);
+  opacity: 1; /* stops global a:hover fade */
 }
 
+/* Click / active */
 .btn-outline:active {
-  transform: scale(0.97);
+  background: rgba(170, 140, 80, 0.95); /* darker champagne */
+  border-color: rgba(170, 140, 80, 0.95);
+  transform: scale(0.96);
 }
 
+/* Accessibility focus */
 .btn-outline:focus-visible {
   outline: 3px solid rgba(200, 169, 106, 0.35);
   outline-offset: 3px;
 }
 
+/* Dark champagne version of outline button */
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 28px;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  background: transparent;
+  color: rgba(170, 140, 80, 0.95); /* dark champagne text */
+  border: 1.5px solid rgba(170, 140, 80, 0.95); /* dark champagne outline */
+  border-radius: 999px;
+
+  cursor: pointer;
+  opacity: 1;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.15s ease,
+    opacity 0.25s ease, background 0.25s ease;
+}
+
+/* Hover */
+.btn-outline-dark:hover {
+  background: rgba(200, 169, 106, 0.9); /* champagne fill */
+  color: white;
+  border-color: rgba(200, 169, 106, 0.9);
+}
+
+/* Click */
+.btn-outline-dark:active {
+  background: rgba(150, 120, 65, 0.95); /* deeper champagne */
+  border-color: rgba(150, 120, 65, 0.95);
+  transform: scale(0.96);
+}
+
+/* Accessibility */
+.btn-outline-dark:focus-visible {
+  outline: 3px solid rgba(200, 169, 106, 0.35);
+  outline-offset: 3px;
+}
+.password-input {
+  width: 100%;
+  padding: 12px 20px;
+
+  border-radius: 999px; /* makes it pill shaped like buttons */
+  border: 1.5px solid rgba(200,169,106,0.6);
+
+  background: rgba(255,255,255,0.08);
+  color: black;
+
+  font-size: 0.95rem;
+  outline: none;
+
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.password-input:focus {
+  border-color: rgba(200,169,106,0.9);
+  box-shadow: 0 0 0 3px rgba(200,169,106,0.2);
+}
+.password-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.show-password-btn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: rgba(200,169,106,0.9);
+}
 /* =========================
    RESPONSIVE TWEAKS
    ========================= */

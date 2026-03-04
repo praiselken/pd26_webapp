@@ -13,7 +13,7 @@ export default function Home() {
         <div className="hero-content">
           <div className="hero-card">
             
-            <h1 className="font-orange text-8xl md:text-10xl tracking-wide">#PERFECTLYDIVINE26</h1>
+            <h1 className="font-orange text-8xl md:text-10xl tracking-wide hero-title-shadow">#PERFECTLYDIVINE26</h1>
             <p className="scripture font-playfair italic text-lg">
               “She is more precious than rubies; nothing you desire can compare
               with her.” — <br /> Proverbs 3:15
@@ -62,10 +62,10 @@ export default function Home() {
             </p>
 
             <div className="font-playfair story-actions">
-              <a href="/our-story" className="btn btn-outline">
+              <a href="/our-story" className="btn btn-outline-dark">
                 Read Our Story
               </a>
-              <a href="/events" className="btn btn-outline">
+              <a href="/events" className="btn btn-outline-dark">
                 View Events
               </a>
             </div>
