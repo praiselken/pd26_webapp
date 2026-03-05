@@ -5,46 +5,45 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <section className="hero">
-        <img src={hero} alt="Wedding Hero" className="hero-img" />
-        <div className="hero-gradient" />
+      {/* HERO SECTION */}
+<section className="hero">
+  <img src={hero} alt="Wedding Hero" className="hero-img" />
 
-        <div className="hero-content">
-          <div className="hero-card">
-            <h1 className="font-orange hero-title hero-title-shadow">
-              #PERFECTLYDIVINE26
-      </h1>
+  {/* Gradient Overlay */}
+  <div className="hero-gradient" />
 
-      <p className="scripture font-playfair italic">
-        “She is more precious than rubies; nothing you desire can compare with her.”
-        <br />
-        <span className="scripture-ref">— Proverbs 3:15</span>
-      </p>
+  <div className="hero-content">
+    <h1 className="font-orange hero-title hero-title-shadow">
+      #PERFECTLYDIVINE26
+    </h1>
 
-      {/* IMPORTANT: remove tracking-[0.25em] here */}
-      <p className="dates font-playfair uppercase">
-        09.04.2026 &amp; 11.04.2026
-      </p>
+    <p className="scripture font-playfair italic">
+      “She is more precious than rubies; nothing you desire can compare with her.”
+      <br />
+      <span className="scripture-ref">— Proverbs 3:15</span>
+    </p>
 
-      <div className="cta">
-        <a href="#our-story" className="btn btn-outline">
-          <span>Our Story</span>
-        </a>
+    <p className="dates font-playfair uppercase">
+      09.04.2026 &amp; 11.04.2026
+    </p>
 
-        <a href="/events" className="btn btn-outline">
-          <span>Events</span>
-        </a>
+    <div className="cta">
+      <a href="#our-story" className="btn btn-outline">
+        <span>Our Story</span>
+      </a>
 
-        <a href="/rsvp" className="btn btn-outline-dark">
-          <span>RSVP</span>
-        </a>
+      <a href="/events" className="btn btn-outline">
+        <span>Events</span>
+      </a>
 
-        <a href="/livestream" className="btn btn-outline">
-          <span>Livestream</span>
-        </a>
-      </div>
+      <a href="/rsvp" className="btn btn-outline">
+        <span>RSVP</span>
+      </a>
+
+      <a href="/livestream" className="btn btn-outline">
+        <span>Livestream</span>
+      </a>
     </div>
-
   </div>
 </section>
 

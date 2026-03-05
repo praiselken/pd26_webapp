@@ -2,24 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.hero-title {
-  white-space: nowrap !important;
-  max-width: 100%;
-  display: inline-block;
-  text-align: center;
-
-  /* shrink more on mobile */
-  font-size: clamp(1.05rem, 4.2vw, 4rem) !important;
-
-  /* reduce width contribution from tracking */
-  letter-spacing: clamp(0.01em, 0.2vw, 0.06em) !important;
-
-  line-height: 1.05;
-}
-
 /* =========================
    GLOBAL RESET + THEME
-   ========================= */
+========================= */
 :root {
   /* Brand palette (Royal Wedding) */
   --ivory: #f7f1e8;
@@ -60,11 +45,12 @@
 html,
 body {
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
-  overflow-x: hidden;
   min-width: 320px;
   background: var(--ivory);
   color: var(--ink);
@@ -77,7 +63,7 @@ body {
 
 /* =========================
    BASIC ELEMENTS
-   ========================= */
+========================= */
 a {
   color: inherit;
   text-decoration: none;
@@ -91,6 +77,7 @@ a:hover {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 h1,
@@ -118,7 +105,7 @@ p {
 
 /* =========================
    BUTTONS (GLOBAL)
-   ========================= */
+========================= */
 button {
   appearance: none;
   border: 1px solid transparent;
@@ -163,112 +150,16 @@ button:focus-visible {
   border-color: rgba(255, 255, 255, 0.65);
   color: var(--ink);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn-secondary:hover {
   opacity: 0.92;
 }
 
-/* =========================
-   HERO
-   ========================= */
-.hero {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  background: var(--ivory);
-}
-
-/* Hero image */
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Smooth fade into page background */
-.hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(199, 107, 122, 0.16) 0%,
-    rgba(199, 107, 122, 0.1) 28%,
-    rgba(247, 241, 232, 0.55) 65%,
-    rgba(247, 241, 232, 0.9) 85%,
-    var(--ivory) 100%
-  );
-}
-
-/* Hero content */
-.hero-content {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  text-align: center;
-}
-
-.hero-title {
-  font-size: clamp(1.8rem, 6vw, 6rem);
-  white-space: nowrap; /* keeps it on one line */
-}
-
-/* Slight “card” feel without blocking the image */
-.hero-card {
-  max-width: 760px;
-  padding: 22px 18px;
-  border-radius: var(--radius);
-  color: var(--white);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-}
-
-.hero-card h1 {
-  font-size: clamp(1.2rem, 5vw, 4rem); /* allows smaller mobile scaling */
-  line-height: 1.05;
-  letter-spacing: clamp(0.02em, 0.4vw, 0.08em);
-  margin-bottom: 10px;
-
-  white-space: nowrap; /* keeps it on one line */
-  max-width: 100%;
-  text-align: center;
-}
-
-
-
-.hero-title-shadow {
-  text-shadow:
-    0 3px 6px rgba(0,0,0,0.4),
-    0 10px 30px rgba(0,0,0,0.3),
-    0 0 18px rgba(255,255,255,0.08);
-}
-
-.scripture {
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.92);
-  margin-bottom: 12px;
-}
-
-.dates {
-  margin: 10px 0 22px;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: 0.6px;
-}
-
-.cta {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 /* ===============================
-   PD26 CTA LINKS (CLEAN)
-   Outline + text = champagne (no fill)
+   PD26 CTA LINKS (OUTLINE)
 =================================*/
-
 .btn-outline {
   display: inline-flex;
   align-items: center;
@@ -287,33 +178,30 @@ button:focus-visible {
   border-radius: 999px;
 
   cursor: pointer;
-  opacity: 1; /* overrides global a:hover opacity feel */
+  opacity: 1;
   transition: color 0.25s ease, border-color 0.25s ease, transform 0.15s ease,
-    opacity 0.25s ease;
+    opacity 0.25s ease, background 0.25s ease;
 }
 
-/* hover = still transparent; slightly deeper champagne */
 .btn-outline:hover {
-  background: rgba(200, 169, 106, 0.9); /* champagne fill */
+  background: rgba(200, 169, 106, 0.9);
   color: white;
   border-color: rgba(200, 169, 106, 0.9);
-  opacity: 1; /* stops global a:hover fade */
+  opacity: 1;
 }
 
-/* Click / active */
 .btn-outline:active {
-  background: rgba(170, 140, 80, 0.95); /* darker champagne */
+  background: rgba(170, 140, 80, 0.95);
   border-color: rgba(170, 140, 80, 0.95);
   transform: scale(0.96);
 }
 
-/* Accessibility focus */
 .btn-outline:focus-visible {
   outline: 3px solid rgba(200, 169, 106, 0.35);
   outline-offset: 3px;
 }
 
-/* Dark champagne version of outline button */
+/* Dark champagne version */
 .btn-outline-dark {
   display: inline-flex;
   align-items: center;
@@ -327,8 +215,8 @@ button:focus-visible {
   text-decoration: none;
 
   background: transparent;
-  color: rgba(170, 140, 80, 0.95); /* dark champagne text */
-  border: 1.5px solid rgba(170, 140, 80, 0.95); /* dark champagne outline */
+  color: rgba(170, 140, 80, 0.95);
+  border: 1.5px solid rgba(170, 140, 80, 0.95);
   border-radius: 999px;
 
   cursor: pointer;
@@ -337,75 +225,184 @@ button:focus-visible {
     opacity 0.25s ease, background 0.25s ease;
 }
 
-/* Hover */
 .btn-outline-dark:hover {
-  background: rgba(200, 169, 106, 0.9); /* champagne fill */
+  background: rgba(200, 169, 106, 0.9);
   color: white;
   border-color: rgba(200, 169, 106, 0.9);
 }
 
-/* Click */
 .btn-outline-dark:active {
-  background: rgba(150, 120, 65, 0.95); /* deeper champagne */
+  background: rgba(150, 120, 65, 0.95);
   border-color: rgba(150, 120, 65, 0.95);
   transform: scale(0.96);
 }
 
-/* Accessibility */
 .btn-outline-dark:focus-visible {
   outline: 3px solid rgba(200, 169, 106, 0.35);
   outline-offset: 3px;
 }
-.password-input {
+
+/* =========================
+   HERO (SINGLE SOURCE OF TRUTH)
+   ✅ Gradient overlay works
+   ✅ H1 forced white
+   ✅ Mobile safe, one-line title
+========================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
   width: 100%;
-  padding: 12px 20px;
-
-  border-radius: 999px; /* makes it pill shaped like buttons */
-  border: 1.5px solid rgba(200,169,106,0.6);
-
-  background: rgba(255,255,255,0.08);
-  color: black;
-
-  font-size: 0.95rem;
-  outline: none;
-
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
 }
 
-.password-input:focus {
-  border-color: rgba(200,169,106,0.9);
-  box-shadow: 0 0 0 3px rgba(200,169,106,0.2);
+/* Background image */
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
-.password-input-wrapper {
+
+/* Gradient overlay over image */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(199, 107, 122, 0.15),
+    rgba(247, 241, 232, 0.6) 60%,
+    #f7f1e8 100%
+  );
+}
+
+/* Content above gradient */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* ✅ Force hero H1 white even if font-orange sets color */
+.hero-content h1,
+.hero-title {
+  color: #fff !important;
+}
+
+/* One-line title that shrinks on phone */
+.hero-title {
+  white-space: nowrap !important;
+  max-width: 100%;
+  display: inline-block;
+  line-height: 1.05;
+
+   /* Larger on mobile but still responsive */
+  font-size: clamp(1.8rem, 6vw, 4rem);
+
+  letter-spacing: clamp(0.02em, 0.2vw, 0.06em);
+}
+
+/* Shadow you created */
+.hero-title-shadow {
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(255, 255, 255, 0.08);
+}
+
+.hero .scripture,
+.hero .dates {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.scripture-ref {
+  display: inline-block;
+  margin-top: 6px;
+}
+
+/* CTA grid: 1 col mobile, 2 col desktop */
+.hero .cta {
+  margin-top: 18px;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.hero .cta .btn {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .hero .cta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-content {
+    padding: 14px;
+  }
+  .hero-title {
+    font-size: clamp(0.95rem, 4vw, 2rem) !important;
+    letter-spacing: 0.02em !important;
+  }
+}
+
+/* HERO CONTENT WRAPPER */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  padding: 24px;
+
+  /* Controls spacing between elements */
+  gap: 12px;
 }
 
-.show-password-btn {
-  align-self: flex-end;
-  background: none;
-  border: none;
-  font-size: 0.8rem;
-  cursor: pointer;
-  color: rgba(200,169,106,0.9);
+/* Heading spacing */
+.hero-title {
+  margin: 0;
 }
-/* =========================
-   RESPONSIVE TWEAKS
-   ========================= */
-@media (max-width: 480px) {
-  .hero {
-    height: 92vh;
-  }
 
-  .hero-card {
-    padding: 18px 14px;
-  }
+/* Scripture closer to title */
+.scripture {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/* Dates closer */
+.dates {
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+/* CTA buttons closer */
+.cta {
+  margin-top: 10px;
 }
 
 /* =========================
    SCROLL INDICATOR
-   ========================= */
+========================= */
 .scroll-indicator {
   position: absolute;
   left: 50%;
@@ -417,6 +414,7 @@ button:focus-visible {
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
   opacity: 0.95;
+  z-index: 3;
 }
 
 .scroll-text {
@@ -462,13 +460,14 @@ button:focus-visible {
 
 /* =========================
    OUR STORY PREVIEW SECTION
-   ========================= */
+========================= */
 .story-preview {
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .eyebrow {
@@ -498,8 +497,9 @@ button:focus-visible {
   flex-wrap: wrap;
 }
 
-/* NAVBAR */
-
+/* =========================
+   NAVBAR
+========================= */
 .nav {
   position: fixed;
   top: 0;
@@ -508,21 +508,8 @@ button:focus-visible {
   padding: 20px 40px;
   transition: 0.4s ease;
   overflow: hidden;
-    mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent
-  );
-}
-
-.nav nav a:hover {
-  color: var(--rose);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  mask-image: linear-gradient(to bottom, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
 }
 
 .nav::before {
@@ -553,7 +540,10 @@ button:focus-visible {
   font-weight: 500;
 }
 
-/* SCROLL STATE */
+.nav nav a:hover {
+  color: var(--rose);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
 
 .nav-scrolled {
   background: linear-gradient(
@@ -564,18 +554,6 @@ button:focus-visible {
   );
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-}
-
-.nav-scrolled::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.08),
-    transparent 70%
-  );
-  pointer-events: none;
 }
 
 .nav-scrolled nav a {
@@ -590,27 +568,143 @@ button:focus-visible {
   color: #211a1d;
 }
 
-
+/* =========================
+   FONTS
+========================= */
 @font-face {
   font-family: "OrangeAvenue";
-  src: url("/src/assets/fonts/OrangeAvenueDEMO-Regular.otf")
-    format("opentype");
+  src: url("/src/assets/fonts/OrangeAvenueDEMO-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "OrangeAvenueOutline";
-  src: url("/src/assets/fonts/OrangeAvenueDEMO-Outline.otf")
-    format("opentype");
+  src: url("/src/assets/fonts/OrangeAvenueDEMO-Outline.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-/* =========================
-   RSVP PAGE
-   ========================= */
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
+/* Ensure desktop links can be white */
+.nav a {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+  }
+
+  .mobile-menu-overlay {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+  }
+
+  .mobile-menu {
+    position: relative;
+    margin-top: 80px;
+    padding: 26px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0)
+    );
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 18px;
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .mobile-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    transition: color 220ms ease, transform 220ms ease;
+  }
+
+  .mobile-menu a:hover,
+  .mobile-menu a:active {
+    color: var(--rose);
+    transform: translateY(-1px);
+  }
+}
+
+/* =========================
+   PASSWORD INPUT (GATE)
+========================= */
+.password-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 12px 20px;
+
+  border-radius: 999px;
+  border: 1.5px solid rgba(200, 169, 106, 0.6);
+
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+
+  font-size: 0.95rem;
+  outline: none;
+
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.password-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.password-input:focus {
+  border-color: rgba(200, 169, 106, 0.9);
+  box-shadow: 0 0 0 3px rgba(200, 169, 106, 0.2);
+}
+
+.show-password-btn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: rgba(200, 169, 106, 0.9);
+}
+
+/* =========================
+   RSVP PAGE (MINIMAL LUXE)
+========================= */
 .rsvp-hero {
   position: relative;
   min-height: 100vh;
@@ -631,6 +725,7 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   background: linear-gradient(
     to bottom,
     rgba(247, 241, 232, 0.65),
@@ -641,6 +736,7 @@ button:focus-visible {
 .rsvp-container {
   position: relative;
   width: min(500px, 92%);
+  padding: 16px;
 }
 
 .rsvp-card {
@@ -649,41 +745,18 @@ button:focus-visible {
   border-radius: var(--radius);
   padding: 40px 32px;
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   text-align: center;
 }
 
-.rsvp-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+@media (max-width: 640px) {
+  .rsvp-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
 }
 
-/* Stack title + name vertically */
-.rsvp-stack {
-  display: grid;
-  gap: 14px;
-}
-
-/* tighten spacing under the question block */
-.rsvp-step {
-  margin-top: 14px;       /* smaller than mt-6 */
-  min-height: 230px;
-}
-
-/* review sits a bit lower */
-.rsvp-step-review {
-  margin-top: 28px;
-}
-
-/* tighten nav gap */
-.rsvp-nav-tight {
-  margin-top: 10px;       /* smaller than before */
-}
-
-/* optional: reduce question spacing slightly */
-.rsvp-question {
-  margin-bottom: 10px;
-}
+/* Form fields */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -699,6 +772,8 @@ button:focus-visible {
 }
 
 .form-input {
+  width: 100%;
+  max-width: 100%;
   padding: 12px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -710,27 +785,11 @@ button:focus-visible {
   outline: none;
   border-color: var(--champagne);
 }
-/* =========================
-   RSVP MULTI-STEP (MINIMAL LUXE)
-   ========================= */
 
-.rsvp-top {
-  margin-bottom: 18px;
-}
-
-.rsvp-title {
-  font-size: clamp(2rem, 3.2vw, 2.6rem);
-  margin: 0 0 6px;
-}
-
-.rsvp-subtitle {
-  margin-bottom: 14px;
-  color: rgba(33, 26, 29, 0.72);
-}
-
+/* Steps */
 .rsvp-step {
   margin-top: 10px;
-  min-height: 260px; /* keeps card steady while animating */
+  min-height: 240px;
 }
 
 .rsvp-question {
@@ -740,24 +799,7 @@ button:focus-visible {
   color: rgba(33, 26, 29, 0.85);
 }
 
-.rsvp-hint {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: rgba(33, 26, 29, 0.65);
-}
-
-.rsvp-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-@media (max-width: 560px) {
-  .rsvp-row {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* Progress dots */
 .rsvp-dots {
   display: flex;
   justify-content: center;
@@ -773,16 +815,18 @@ button:focus-visible {
 }
 
 .rsvp-dot.active {
-  background: rgba(200, 169, 106, 0.95); /* champagne */
+  background: rgba(200, 169, 106, 0.95);
 }
 
+/* Choices */
 .choice-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
 .choice-pill {
+  width: 100%;
   border-radius: 999px;
   padding: 12px 14px;
   border: 1px solid var(--border);
@@ -801,6 +845,13 @@ button:focus-visible {
   box-shadow: 0 0 0 4px rgba(200, 169, 106, 0.15);
 }
 
+@media (min-width: 900px) {
+  .choice-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Nav buttons */
 .rsvp-nav {
   display: flex;
   justify-content: space-between;
@@ -808,12 +859,22 @@ button:focus-visible {
   margin-top: 18px;
 }
 
+@media (max-width: 640px) {
+  .rsvp-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Review */
 .review-box {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px;
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   margin-bottom: 14px;
   text-align: left;
 }
@@ -859,268 +920,4 @@ button:focus-visible {
   padding: 16px;
   border: 1px solid var(--champagne);
   border-radius: var(--radius);
-}
-
-.rsvp-step { min-height: 240px; }
-.rsvp-dots { display:flex; justify-content:center; gap:8px; margin-top:10px; }
-.rsvp-dot { width:7px; height:7px; border-radius:999px; background: rgba(33,26,29,0.18); }
-.rsvp-dot.active { background: rgba(200,169,106,0.95); }
-
-.choice-grid { display:grid; gap:10px; }
-.choice-pill {
-  border-radius:999px;
-  padding:12px 14px;
-  border:1px solid var(--border);
-  background: rgba(255,255,255,0.75);
-  color: rgba(33,26,29,0.9);
-}
-.choice-pill.selected {
-  border-color: rgba(200,169,106,0.7);
-  box-shadow: 0 0 0 4px rgba(200,169,106,0.15);
-}
-
-.rsvp-nav { display:flex; justify-content:space-between; gap:12px; margin-top:18px; }
-
-.review-box { border:1px solid var(--border); border-radius: var(--radius); padding:16px; background: rgba(255,255,255,0.55); }
-.review-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(33,26,29,0.08); }
-.review-row:last-child { border-bottom:0; }
-.review-label { font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; color: rgba(33,26,29,0.55); }
-.review-value { color: rgba(33,26,29,0.85); margin-top:2px; }
-.review-edit { background: transparent; border:1px solid rgba(33,26,29,0.12); border-radius:999px; padding:10px 14px; font-size:0.85rem; }
-
-/* =========================
-   MOBILE RESPONSIVE PATCH
-   Paste at bottom of index.css
-========================= */
-
-/* Ensure everything sizes correctly on mobile */
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-/* Images never overflow */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Make long headings wrap instead of overflowing */
-h1,
-h2,
-h3,
-p {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-/* --- RSVP layout fixes --- */
-.rsvp-container {
-  padding: 16px;
-}
-
-.rsvp-card {
-  width: 100%;
-  max-width: 560px; /* desktop cap */
-  margin: 0 auto;
-}
-
-/* Inputs/buttons should fill available space */
-.form-input,
-.password-input {
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Button groups should wrap nicely */
-.cta,
-.rsvp-nav,
-.choice-grid {
-  flex-wrap: wrap;
-}
-
-/* Choice pills: 2 columns on phone, 3+ on larger screens */
-.choice-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.choice-pill {
-  width: 100%;
-  justify-content: center;
-  text-align: center;
-}
-
-/* Buttons: full width on phone for a luxury, tappable feel */
-@media (max-width: 640px) {
-  .btn,
-  .btn-outline,
-  .btn-outline-dark,
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-  }
-
-  .rsvp-nav {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  /* Make RSVP card spacing nicer */
-  .rsvp-card {
-    padding: 18px;
-    border-radius: 20px;
-  }
-
-  /* Smaller hero text + no overflow */
-  .hero-card h1,
-  .rsvp-card h1 {
-    font-size: clamp(2rem, 8vw, 3rem);
-    line-height: 1.05;
-    letter-spacing: 0.06em;
-  }
-
-  /* CTA stack */
-  .cta {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  /* Reduce overly wide tracking that causes overflow */
-  .dates {
-    letter-spacing: 0.12em !important;
-    text-align: center;
-  }
-}
-
-/* =========================
-   HERO (FIXED + MOBILE SAFE)
-   Paste at BOTTOM of index.css
-========================= */
-
-.hero {
-  position: relative;
-  min-height: 100vh;          /* IMPORTANT: gives the hero height */
-  width: 100%;
-  overflow: hidden;           /* prevents sideways overflow */
-  display: grid;
-  place-items: center;
-}
-
-/* Background image */
-.hero-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-/* Gradient overlay above image but below content */
-.hero-gradient {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  /* tune this if you want it darker/lighter */
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,0.25) 0%,
-    rgba(0,0,0,0.35) 35%,
-    rgba(0,0,0,0.55) 100%
-  );
-}
-
-/* Content wrapper above everything */
-.hero-content {
-  position: relative;
-  z-index: 2;                 /* IMPORTANT: ensures text/buttons show */
-  width: 100%;
-  padding: 18px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-}
-
-.hero-card {
-  width: min(920px, 100%);
-  padding: clamp(16px, 4vw, 28px);
-  border-radius: 22px;
-
-  /* Luxury glass card */
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* ONE-LINE hero title that scales down on phones */
-.hero-title {
-  white-space: nowrap;
-  display: inline-block;
-  max-width: 100%;
-  line-height: 1.05;
-
-  font-size: clamp(1.02rem, 4.2vw, 4rem);
-  letter-spacing: clamp(0.01em, 0.18vw, 0.06em);
-}
-
-/* Scripture */
-.scripture {
-  margin-top: 10px;
-  font-size: clamp(0.95rem, 3.8vw, 1.15rem);
-  line-height: 1.55;
-  color: rgba(255,255,255,0.92);
-}
-
-.scripture-ref {
-  display: inline-block;
-  margin-top: 6px;
-}
-
-/* Dates */
-.dates {
-  margin-top: 14px;
-  font-size: clamp(0.95rem, 3.6vw, 1.25rem);
-  letter-spacing: clamp(0.12em, 1.2vw, 0.25em);
-  color: rgba(255,255,255,0.92);
-}
-
-/* CTA buttons layout */
-.cta {
-  margin-top: 18px;
-  width: 100%;
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.cta .btn {
-  width: 100%;
-}
-
-/* 2 columns on larger screens */
-@media (min-width: 640px) {
-  .cta {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-/* Extra small phones */
-@media (max-width: 380px) {
-  .hero-content {
-    padding: 14px;
-  }
-  .hero-title {
-    font-size: clamp(0.95rem, 4vw, 2rem);
-    letter-spacing: 0.02em;
-  }
 }
