@@ -6,7 +6,7 @@ import bg from "../assets/hands.jpg";
 
 type DescribesYou = "" | "Family" | "Friends" | "Church Ministry" | "Campus Ministry";
 
-type ChurchRole = "" | "Zonal Pastor" | "Deacon" | "Deaconess" | "Sister" | "Brother";
+type ChurchRole = "" | "Regional Pastor" | "Zonal Pastor" | "Deacon" | "Deaconess" | "Sister" | "Brother";
 
 type CampusRole =
   | ""
@@ -18,7 +18,7 @@ type CampusRole =
   | "Sister"
   | "Brother";
 
-type AttendOption = "" | "Yes" | "No" | "Will watch from afar";
+type AttendOption = "" | "Yes" | "No";
 
 type FormState = {
   title: string;
@@ -53,7 +53,7 @@ type Step = { key: StepKey; label: string };
 ========================= */
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzkofYYkW2_7apXJQtVXah68rOijU4M8qJ63I5PHHAjyGsf5tPYY8VMiA2FW17ZmYjD/exec";
+  "https://script.google.com/macros/s/AKfycbxYvNtLRqaANcYo4_jSgW03P2sTG6xqKVK7R24Usm_MgrBqWEjuMp4hmy_CzFcYoL0w/exec";
 
 const fade = {
   initial: { opacity: 0, y: 8 },
@@ -61,7 +61,7 @@ const fade = {
   exit: { opacity: 0, y: -8, transition: { duration: 0.22 } },
 };
 
-const attendOptions: AttendOption[] = ["Yes", "No", "Will watch from afar"];
+const attendOptions: AttendOption[] = ["Yes", "No"];
 
 const describesOptions: Exclude<DescribesYou, "">[] = [
   "Family",
@@ -71,6 +71,7 @@ const describesOptions: Exclude<DescribesYou, "">[] = [
 ];
 
 const churchRoleOptions: Exclude<ChurchRole, "">[] = [
+ "Regional Pastor",
   "Zonal Pastor",
   "Deacon",
   "Deaconess",
@@ -169,11 +170,11 @@ export default function RSVP() {
         return { ok: true };
 
       case "churchRole":
-        if (!data.churchRole) return { ok: false, message: "Please choose your church role." };
+        if (!data.churchRole) return { ok: false, message: "Please choose your church position." };
         return { ok: true };
 
       case "campusRole":
-        if (!data.campusRole) return { ok: false, message: "Please choose your campus role." };
+        if (!data.campusRole) return { ok: false, message: "Please choose your campus position." };
         return { ok: true };
 
       case "email":
@@ -338,7 +339,7 @@ export default function RSVP() {
 
                         {current === "churchRole" && (
                           <>
-                            <p className="rsvp-question">Church ministry — what role?</p>
+                            <p className="rsvp-question">Church ministry — what position?</p>
 
                             <div className="choice-grid">
                               {churchRoleOptions.map((opt) => (
@@ -357,7 +358,7 @@ export default function RSVP() {
 
                         {current === "campusRole" && (
                           <>
-                            <p className="rsvp-question">Campus ministry — what role?</p>
+                            <p className="rsvp-question">Campus ministry — what position?</p>
 
                             <div className="choice-grid">
                               {campusRoleOptions.map((opt) => (
