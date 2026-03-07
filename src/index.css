@@ -6,22 +6,18 @@
    GLOBAL RESET + THEME
 ========================= */
 :root {
-  /* Brand palette (Royal Wedding) */
   --ivory: #f7f1e8;
   --rose: #c76b7a;
   --champagne: #c8a96a;
   --ink: #211a1d;
 
-  /* Neutrals */
   --white: #ffffff;
   --muted: rgba(33, 26, 29, 0.7);
   --border: rgba(33, 26, 29, 0.12);
 
-  /* Layout */
   --container: 1100px;
   --radius: 14px;
 
-  /* Type */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   line-height: 1.5;
@@ -56,7 +52,6 @@ body {
   color: var(--ink);
 }
 
-/* Remove Vite starter centering */
 #root {
   min-height: 100%;
 }
@@ -92,13 +87,11 @@ p {
   color: var(--muted);
 }
 
-/* Handy utility container class for all pages */
 .container {
   width: min(var(--container), calc(100% - 48px));
   margin: 0 auto;
 }
 
-/* Default section spacing for entire project */
 .section {
   padding: 88px 0;
 }
@@ -128,7 +121,6 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Primary / Secondary button styles you can reuse */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -165,18 +157,15 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 10px;
-
   padding: 12px 28px;
   font-size: 0.85rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
-
   background: transparent;
   color: var(--ivory);
   border: 1.5px solid var(--ivory);
   border-radius: 999px;
-
   cursor: pointer;
   opacity: 1;
   transition: color 0.25s ease, border-color 0.25s ease, transform 0.15s ease,
@@ -201,24 +190,20 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Dark champagne version */
 .btn-outline-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-
   padding: 12px 28px;
   font-size: 0.85rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
-
   background: transparent;
   color: rgba(170, 140, 80, 0.95);
   border: 1.5px solid rgba(170, 140, 80, 0.95);
   border-radius: 999px;
-
   cursor: pointer;
   opacity: 1;
   transition: color 0.25s ease, border-color 0.25s ease, transform 0.15s ease,
@@ -243,12 +228,8 @@ button:focus-visible {
 }
 
 /* =========================
-   HERO (SINGLE SOURCE OF TRUTH)
-   ✅ Gradient overlay works
-   ✅ H1 forced white
-   ✅ Mobile safe, one-line title
+   HERO
 ========================= */
-
 .hero {
   position: relative;
   min-height: 100vh;
@@ -256,7 +237,6 @@ button:focus-visible {
   overflow: hidden;
 }
 
-/* Background image */
 .hero-img {
   position: absolute;
   inset: 0;
@@ -266,7 +246,6 @@ button:focus-visible {
   z-index: 0;
 }
 
-/* Gradient overlay over image */
 .hero-gradient {
   position: absolute;
   inset: 0;
@@ -279,48 +258,49 @@ button:focus-visible {
   );
 }
 
-/* Content above gradient */
 .hero-content {
   position: relative;
   z-index: 2;
   min-height: 100vh;
   width: 100%;
   padding: 24px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  gap: 12px;
 }
 
-/* ✅ Force hero H1 white even if font-orange sets color */
 .hero-content h1,
 .hero-title {
   color: #fff !important;
 }
 
-/* One-line title that shrinks on phone */
 .hero-title {
   white-space: nowrap !important;
   max-width: 100%;
   display: inline-block;
   line-height: 1.05;
-
-   /* Larger on mobile but still responsive */
   font-size: clamp(1.8rem, 6vw, 4rem);
-
   letter-spacing: clamp(0.02em, 0.2vw, 0.06em);
+  margin: 0;
 }
 
-/* Shadow you created */
 .hero-title-shadow {
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.3),
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4),
+    0 10px 30px rgba(0, 0, 0, 0.3),
     0 0 18px rgba(255, 255, 255, 0.08);
-}.choice-pill.selected {
-  transform: scale(0.97);
-}z
+}
 
 .hero .scripture,
 .hero .dates {
   color: rgba(255, 255, 255, 0.92);
+}
+
+.scripture {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .scripture-ref {
@@ -328,14 +308,17 @@ button:focus-visible {
   margin-top: 6px;
 }
 
-/* CTA grid: 1 col mobile, 2 col desktop */
+.dates {
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
 .hero .cta {
-  margin-top: 18px;
+  margin-top: 10px;
   width: 100%;
   max-width: 520px;
   margin-left: auto;
   margin-right: auto;
-
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
@@ -355,51 +338,11 @@ button:focus-visible {
   .hero-content {
     padding: 14px;
   }
+
   .hero-title {
     font-size: clamp(0.95rem, 4vw, 2rem) !important;
     letter-spacing: 0.02em !important;
   }
-}
-
-/* HERO CONTENT WRAPPER */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  min-height: 100vh;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  padding: 24px;
-
-  /* Controls spacing between elements */
-  gap: 12px;
-}
-
-/* Heading spacing */
-.hero-title {
-  margin: 0;
-}
-
-/* Scripture closer to title */
-.scripture {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
-
-/* Dates closer */
-.dates {
-  margin-top: 4px;
-  margin-bottom: 6px;
-}
-
-/* CTA buttons closer */
-.cta {
-  margin-top: 10px;
 }
 
 /* =========================
@@ -587,7 +530,9 @@ button:focus-visible {
   font-style: normal;
 }
 
-/* Mobile menu button */
+/* =========================
+   MOBILE NAV
+========================= */
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -595,7 +540,6 @@ button:focus-visible {
   cursor: pointer;
 }
 
-/* Ensure desktop links can be white */
 .nav a {
   color: #fff;
 }
@@ -629,17 +573,14 @@ button:focus-visible {
     flex-direction: column;
     gap: 18px;
     text-align: center;
-
     background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0.75),
       rgba(255, 255, 255, 0.35),
       rgba(255, 255, 255, 0)
     );
-
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 18px;
     margin-left: 18px;
@@ -662,6 +603,203 @@ button:focus-visible {
 }
 
 /* =========================
+   WELCOME POPUP
+========================= */
+
+.welcome-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(33, 26, 29, 0.5);
+  backdrop-filter: blur(8px);
+  animation: popupFade 0.35s ease;
+}
+
+.welcome-popup-card {
+  position: relative;
+  width: min(100%, 560px);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)),
+    linear-gradient(135deg, #f7f1e8 0%, #fffaf5 45%, #f8e7ea 100%);
+  border: 1px solid rgba(200, 169, 106, 0.35);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow:
+    0 20px 50px rgba(33, 26, 29, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  text-align: center;
+  animation: popupCardIn 0.45s ease;
+}
+
+.welcome-popup-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(33, 26, 29, 0.06);
+  color: #211a1d;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.welcome-popup-close span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-1px);
+}
+
+.welcome-popup-close:hover {
+  background: rgba(199, 107, 122, 0.12);
+  transform: scale(1.05);
+}
+
+.welcome-popup-eyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c8a96a;
+}
+
+.welcome-popup-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.15;
+  color: #211a1d;
+  font-family: "Playfair Display", serif;
+}
+
+.welcome-popup-divider {
+  width: 70px;
+  height: 1px;
+  margin: 1.25rem auto 1.5rem;
+  background: linear-gradient(to right, transparent, #c8a96a, transparent);
+}
+
+.welcome-popup-text {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(33, 26, 29, 0.82);
+}
+
+.welcome-popup-reminder {
+  margin: 1.35rem 0 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #211a1d;
+}
+
+.welcome-popup-reminder span {
+  color: #c76b7a;
+  font-weight: 700;
+}
+
+.welcome-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.welcome-popup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.28s ease;
+  cursor: pointer;
+}
+
+.welcome-popup-btn.primary {
+  border: none;
+  background: linear-gradient(135deg, #c76b7a, #b85d6d);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(199, 107, 122, 0.25);
+}
+
+.welcome-popup-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(199, 107, 122, 0.3);
+}
+
+.welcome-popup-btn.secondary {
+  border: 1px solid rgba(33, 26, 29, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  color: #211a1d;
+}
+
+.welcome-popup-btn.secondary:hover {
+  background: rgba(247, 241, 232, 0.95);
+  transform: translateY(-1px);
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .welcome-popup-card {
+    padding: 2rem 1.25rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .welcome-popup-title {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+    padding: 0 1rem;
+  }
+
+  .welcome-popup-text,
+  .welcome-popup-reminder {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .welcome-popup-actions {
+    margin-top: 1.5rem;
+  }
+
+  .welcome-popup-btn {
+    width: 100%;
+  }
+}
+
+/* =========================
    PASSWORD INPUT (GATE)
 ========================= */
 .password-input-wrapper {
@@ -673,16 +811,12 @@ button:focus-visible {
 .password-input {
   width: 100%;
   padding: 12px 20px;
-
   border-radius: 999px;
   border: 1.5px solid rgba(200, 169, 106, 0.6);
-
   background: rgba(255, 255, 255, 0.12);
   color: black;
-
   font-size: 0.95rem;
   outline: none;
-
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -737,7 +871,7 @@ button:focus-visible {
 
 .rsvp-container {
   position: relative;
-  width: min(500px, 92%);
+  width: min(680px, 92%);
   padding: 16px;
 }
 
@@ -758,7 +892,6 @@ button:focus-visible {
   }
 }
 
-/* Form fields */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -788,10 +921,18 @@ button:focus-visible {
   border-color: var(--champagne);
 }
 
-/* Steps */
+.rsvp-stack {
+  display: grid;
+  gap: 14px;
+}
+
 .rsvp-step {
   margin-top: 10px;
-  min-height: 240px;
+  min-height: 260px;
+}
+
+.rsvp-step-review {
+  min-height: auto;
 }
 
 .rsvp-question {
@@ -801,7 +942,6 @@ button:focus-visible {
   color: rgba(33, 26, 29, 0.85);
 }
 
-/* Progress dots */
 .rsvp-dots {
   display: flex;
   justify-content: center;
@@ -820,55 +960,64 @@ button:focus-visible {
   background: rgba(200, 169, 106, 0.95);
 }
 
-/* Choices */
+/* =========================
+   RSVP OPTION BUTTONS
+========================= */
 .choice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  margin-top: 12px;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 14px;
+  width: 100%;
 }
 
 .choice-pill {
   width: 100%;
+  min-height: 62px;
+  padding: 18px 24px;
   border-radius: 999px;
-  padding: 14px 18x;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.75);
-  color: rgba(33, 26, 29, 0.9);
+  border: 1.5px solid rgba(33, 26, 29, 0.15);
+  background: rgba(255, 255, 255, 0.78);
+  font-family: inherit;
+  font-size: 1.02rem;
+  line-height: 1.2;
   text-align: center;
+  white-space: normal;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.25s ease;
 }
 
 .choice-pill:hover {
-  opacity: 0.95;
-  transform: translateY(-1px);
+  border-color: var(--champagne);
 }
 
 .choice-pill.selected {
   background: rgba(200, 169, 106, 0.12);
-  border-color: rgba(200, 169, 106, 0.7);
-  box-shadow: 0 0 0 2px rgba(200, 169, 106, 0.15);
+  border-color: var(--champagne);
+  box-shadow: 0 0 0 2px rgba(200, 169, 106, 0.18);
+  transform: scale(0.985);
+}
+
+.choice-pill.glow {
+  animation: rsvpGlow 0.45s ease;
 }
 
 @keyframes rsvpGlow {
   0% {
-    box-shadow: 0 0 0 rgba(200,169,106,0);
+    box-shadow: 0 0 0 rgba(200, 169, 106, 0);
   }
-
   50% {
-    box-shadow: 0 0 12px rgba(200,169,106,0.35);
+    box-shadow: 0 0 14px rgba(200, 169, 106, 0.38);
   }
-
   100% {
-    box-shadow: 0 0 0 rgba(200,169,106,0);
+    box-shadow: 0 0 0 rgba(200, 169, 106, 0);
   }
 }
 
-@media (min-width: 900px) {
-  .choice-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-/* Nav buttons */
 .rsvp-nav {
   display: flex;
   justify-content: space-between;
@@ -884,7 +1033,6 @@ button:focus-visible {
   }
 }
 
-/* Review */
 .review-box {
   border: 1px solid var(--border);
   border-radius: var(--radius);

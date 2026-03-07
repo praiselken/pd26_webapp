@@ -1,9 +1,11 @@
 import hero from "../assets/hands.jpg";
 import Navbar from "../components/Navbar";
+import WelcomePopup from "../components/WelcomePopup";
 
 export default function Home() {
   return (
     <main>
+      <WelcomePopup />
       <Navbar />
       {/* HERO SECTION */}
 <section className="hero">
