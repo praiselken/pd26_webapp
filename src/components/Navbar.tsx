@@ -20,9 +20,9 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <nav className="nav-links">
             <Link to="/">Home</Link>
-            <Link to="/our-story">Our Story</Link>
             <Link to="/events">Events</Link>
             <Link to="/rsvp">RSVP</Link>
+            <Link to="/faqs">FAQs</Link>
             <Link to="/livestream">Livestream</Link>
           </nav>
 
@@ -87,14 +87,14 @@ export default function Navbar() {
             <NavLink to="/" onClick={() => setMobileOpen(false)}>
               Home
             </NavLink>
-            <NavLink to="/our-story" onClick={() => setMobileOpen(false)}>
-              Our Story
-            </NavLink>
             <NavLink to="/events" onClick={() => setMobileOpen(false)}>
               Events
             </NavLink>
             <NavLink to="/rsvp" onClick={() => setMobileOpen(false)}>
               RSVP
+            </NavLink>
+                  <NavLink to="/faqs" onClick={() => setMobileOpen(false)}>
+              FAQs
             </NavLink>
             <NavLink to="/livestream" onClick={() => setMobileOpen(false)}>
               Livestream

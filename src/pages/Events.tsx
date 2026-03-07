@@ -1,20 +1,78 @@
-import EventCard from "../components/eventCard";
-import { events } from "../data/events";
+import Navbar from "../components/Navbar";
+import hero from "../assets/hands.jpg";
+import { CalendarDays, MapPin } from "lucide-react";
 
-export default function EventsPage() {
+const events = [
+  {
+    title: "Traditional Ceremony",
+    date: "April 9th, 2026",
+    time: "12:00pm",
+    venue: "Angels Court",
+    location: "LoveWorld Campground.",
+  },
+  {
+    title: "White Wedding (Church Service)",
+    date: "April 11th, 2026",
+    time: "10:00am",
+    venue: "Bay 2",
+    location: "LoveWorld Campground.",
+  },
+  {
+    title: "Reception",
+    date: "April 11th, 2026",
+    time: "Follows immediately after the ceremony.",
+    venue: "Crystal Palace",
+    location: "LoveWorld Campground.",
+  },
+];
+
+export default function Events() {
   return (
-    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto" }}>
-      <header style={{ marginBottom: 24 }}>
-        <h1 style={{ margin: 0 }}>Events</h1>
-        <p style={{ marginTop: 8 }}>
-          Details for <strong>9 April</strong> and <strong>11 April</strong>.
-        </p>
-      </header>
+    <main className="events-page">
+      <Navbar />
 
-      <section style={{ display: "grid", gap: 16 }}>
-        {events.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
+      <section
+        className="events-hero"
+        style={{ backgroundImage: `url(${hero})` }}
+      >
+        <div className="events-hero-overlay" />
+        <div className="events-hero-fade" />
+
+        <div className="events-hero-content">
+          <p className="events-kicker">Our Wedding Weekend</p>
+          <h1 className="font-playfair events-title">Schedule</h1>
+        </div>
+      </section>
+
+      <section className="events-section">
+        <div className="events-container">
+          {events.map((event, index) => (
+            <article key={index} className="event-card">
+              <h2 className="event-heading">{event.title}</h2>
+              <div className="event-divider" />
+
+              <div className="event-row">
+                <div className="event-icon-wrap">
+                  <CalendarDays size={20} strokeWidth={1.8} />
+                </div>
+                <div className="event-info">
+                  <h3>{event.date}</h3>
+                  <p>{event.time}</p>
+                </div>
+              </div>
+
+              <div className="event-row">
+                <div className="event-icon-wrap">
+                  <MapPin size={20} strokeWidth={1.8} />
+                </div>
+                <div className="event-info">
+                  <h3>{event.venue}</h3>
+                  <p>{event.location}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );

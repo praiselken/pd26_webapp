@@ -30,16 +30,16 @@ export default function Home() {
     </p>
 
     <div className="cta">
-      <a href="#our-story" className="btn btn-outline">
-        <span>Our Story</span>
-      </a>
-
       <a href="/events" className="btn btn-outline">
         <span>Events</span>
       </a>
 
       <a href="/rsvp" className="btn btn-outline">
         <span>RSVP</span>
+      </a>
+
+      <a href="#faqs" className="btn btn-outline">
+        <span>FAQs</span>
       </a>
 
       <a href="/livestream" className="btn btn-outline">
@@ -62,8 +62,8 @@ export default function Home() {
             </p>
 
             <div className="font-playfair story-actions">
-              <a href="/our-story" className="btn btn-outline-dark">
-                Read Our Story
+              <a href="/faqs" className="btn btn-outline-dark">
+                FAQs and Dress Code
               </a>
               <a href="/events" className="btn btn-outline-dark">
                 View Events
