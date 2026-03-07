@@ -38,7 +38,7 @@ export default function Home() {
         <span>RSVP</span>
       </a>
 
-      <a href="#faqs" className="btn btn-outline">
+      <a href="/faqs" className="btn btn-outline">
         <span>FAQs</span>
       </a>
 

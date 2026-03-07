@@ -1,107 +1,121 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import monogram from "../assets/pd26logo.png"; // <- change this to your actual monogram file
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/our-story", label: "Our Story" },
+    { to: "/events", label: "Events" },
+    { to: "/rsvp", label: "RSVP" },
+    { to: "/livestream", label: "Livestream" },
+  ];
+
   return (
-    <div className="font-playfair">
+    <>
       <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="nav-inner">
-          <h2 className="logo">#PD26</h2>
+          <NavLink to="/" className="nav-logo" aria-label="Go to homepage">
+            <img src={monogram} alt="PD26 monogram" className="nav-logo-img" />
+          </NavLink>
 
-          {/* Desktop Navigation */}
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/events">Events</Link>
-            <Link to="/rsvp">RSVP</Link>
-            <Link to="/faqs">FAQs</Link>
-            <Link to="/livestream">Livestream</Link>
+          <nav className="nav-links" aria-label="Primary">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
           </nav>
 
-          {/* Mobile toggle */}
           <button
-            type="button"
-            className="mobile-menu-btn"
-            onClick={() => setMobileOpen((v) => !v)}
+            className={`nav-toggle ${mobileOpen ? "open" : ""}`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            type="button"
           >
-            {mobileOpen ? (
-              // X icon (WHITE)
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                fill="none"
-                stroke="#fff"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 6l12 12M6 18L18 6"
-                />
-              </svg>
-            ) : (
-              // hamburger (WHITE)
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                fill="none"
-                stroke="#fff"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
+            <span />
+            <span />
+            <span />
           </button>
         </div>
       </header>
 
-      {/* Mobile Dropdown */}
-      {mobileOpen && (
-        <div className="mobile-menu-wrapper">
-          {/* click-outside layer */}
-          <div
-            className="mobile-menu-overlay"
-            onClick={() => setMobileOpen(false)}
-          />
+      <div
+        className={`mobile-overlay ${mobileOpen ? "show" : ""}`}
+        onClick={() => setMobileOpen(false)}
+      />
 
-          {/* menu */}
-          <div className="mobile-menu">
-            <NavLink to="/" onClick={() => setMobileOpen(false)}>
-              Home
-            </NavLink>
-            <NavLink to="/events" onClick={() => setMobileOpen(false)}>
-              Events
-            </NavLink>
-            <NavLink to="/rsvp" onClick={() => setMobileOpen(false)}>
-              RSVP
-            </NavLink>
-                  <NavLink to="/faqs" onClick={() => setMobileOpen(false)}>
-              FAQs
-            </NavLink>
-            <NavLink to="/livestream" onClick={() => setMobileOpen(false)}>
-              Livestream
-            </NavLink>
-          </div>
+      <aside className={`mobile-drawer ${mobileOpen ? "open" : ""}`}>
+        <div className="mobile-drawer-top">
+          <button
+            className="mobile-close"
+            onClick={() => setMobileOpen(false)}
+            aria-label="Close menu"
+            type="button"
+          >
+            ×
+          </button>
         </div>
-      )}
-    </div>
+
+        <NavLink
+          to="/"
+          className="mobile-drawer-logo"
+          aria-label="Go to homepage"
+        >
+          <img
+            src={monogram}
+            alt="PD26 monogram"
+            className="mobile-drawer-logo-img"
+          />
+        </NavLink>
+
+        <nav className="mobile-drawer-links" aria-label="Mobile Navigation">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                isActive
+                  ? "mobile-drawer-link active"
+                  : "mobile-drawer-link"
+              }
+            >
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
+      </aside>
+    </>
   );
 }

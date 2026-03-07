@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import hero from "../assets/hands.jpg";
+import hero from "../assets/emailpic.jpg";
 import { CalendarDays, MapPin } from "lucide-react";
 
 const events = [

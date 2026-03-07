@@ -4,6 +4,9 @@ import Navbar from "../components/Navbar";
 import PasswordGate from "../components/PasswordGate";
 import bg from "../assets/hands.jpg";
 
+import CalendarButtons from "../components/CalendarButtons";
+import { pd26Events } from "../utils/calendar";
+
 type DescribesYou = "" | "Family" | "Friends" | "Church Ministry" | "Campus Ministry";
 
 type ChurchRole =
@@ -56,7 +59,7 @@ type Step = { key: StepKey; label: string };
 ========================= */
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwtexZ1q8xKQDrztEsteG5sd3_gx-3INAEfeQ0_3i7jP4wSR6dBSs9kcUzVoxnJRXaX/exec";
+  "https://script.google.com/macros/s/AKfycbxxKRPcKay1QgWru8D1ZPTAoBTrzUvDkGm5iCyaYZysNl1B3k2ukaP1R8spW26KvVVc/exec";
 
 const fade = {
   initial: { opacity: 0, y: 8 },
@@ -229,6 +232,8 @@ export default function RSVP() {
     }
   };
 
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <PasswordGate
       heading="RSVP"
@@ -264,6 +269,67 @@ export default function RSVP() {
                 <div className="rsvp-success font-playfair mt-6">
                   <p className="rsvp-success-title">Thank you for confirming 💍</p>
                   <p>We look forward to celebrating with you.</p>
+                  <p className="mt-2">
+                    A confirmation email has been sent, and you can also add your selected
+                    events to your calendar below.
+                  </p>
+
+                  <div className="mt-6 space-y-5 text-left">
+                    {data.traditional?.toLowerCase() === "yes" && (
+                      <div className="rounded-2xl border border-[#eadcc2] bg-[#fcf8f3] p-5 shadow-sm">
+                        <h3 className="font-playfair text-2xl text-[#c76b7a]">
+                          Traditional Ceremony
+                        </h3>
+
+                        <p className="mt-2 leading-7 text-[#211a1d] font-sans">
+                          <strong>April 9th, 2026</strong>
+                          <br />
+                          12:00 PM
+                          <br />
+                          Angels Court, LoveWorld Campground
+                        </p>
+
+                        <CalendarButtons event={pd26Events.traditional} />
+                      </div>
+                    )}
+
+                    {data.white?.toLowerCase() === "yes" && (
+                      <div className="rounded-2xl border border-[#eadcc2] bg-[#fcf8f3] p-5 shadow-sm">
+                        <h3 className="font-playfair text-2xl text-[#c76b7a]">
+                          White Wedding
+                        </h3>
+
+                        <p className="mt-2 leading-7 text-[#211a1d] font-sans">
+                          <strong>April 11th, 2026</strong>
+                          <br />
+                          10:00 AM
+                          <br />
+                          Bay 2, LoveWorld Campground
+                        </p>
+
+<p className="mt-4 font-playfair text-lg text-[#211a1d]">
+Add your selected events to your calendar
+</p>
+                        <CalendarButtons event={pd26Events.white} />
+                      </div>
+                    )}
+
+                    {data.traditional?.toLowerCase() !== "yes" &&
+                      data.white?.toLowerCase() !== "yes" && (
+                        <div className="rounded-2xl border border-[#eadcc2] bg-[#fcf8f3] p-5 text-center">
+                          <p className="text-[#211a1d] font-sans">
+                            You have successfully submitted your RSVP.
+                          </p>
+                        </div>
+                      )}
+                  </div>
+
+                  <a
+                    href="/"
+                    className="mt-6 inline-flex rounded-full border border-[#c8a96a] px-6 py-3 text-sm font-medium text-[#c8a96a] transition hover:bg-[#fbf7f1]"
+                  >
+                    Return Home
+                  </a>
                 </div>
               ) : (
                 <>
