@@ -56,7 +56,7 @@ type Step = { key: StepKey; label: string };
 ========================= */
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxYvNtLRqaANcYo4_jSgW03P2sTG6xqKVK7R24Usm_MgrBqWEjuMp4hmy_CzFcYoL0w/exec";
+  "https://script.google.com/macros/s/AKfycbwtexZ1q8xKQDrztEsteG5sd3_gx-3INAEfeQ0_3i7jP4wSR6dBSs9kcUzVoxnJRXaX/exec";
 
 const fade = {
   initial: { opacity: 0, y: 8 },
