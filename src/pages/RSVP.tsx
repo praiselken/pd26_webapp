@@ -6,7 +6,14 @@ import bg from "../assets/hands.jpg";
 
 type DescribesYou = "" | "Family" | "Friends" | "Church Ministry" | "Campus Ministry";
 
-type ChurchRole = "" | "Regional Pastor" | "Zonal Pastor" | "Deacon" | "Deaconess" | "Sister" | "Brother";
+type ChurchRole =
+  | ""
+  | "Regional Pastor"
+  | "Zonal Pastor"
+  | "Deacon"
+  | "Deaconess"
+  | "Sister"
+  | "Brother";
 
 type CampusRole =
   | ""
@@ -23,17 +30,13 @@ type AttendOption = "" | "Yes" | "No";
 type FormState = {
   title: string;
   fullName: string;
-
   describesYou: DescribesYou;
   churchRole: ChurchRole;
   campusRole: CampusRole;
-
   email: string;
-
   traditional: AttendOption;
   white: AttendOption;
-
-  website: string; // honeypot
+  website: string;
 };
 
 type StepKey =
@@ -71,7 +74,7 @@ const describesOptions: Exclude<DescribesYou, "">[] = [
 ];
 
 const churchRoleOptions: Exclude<ChurchRole, "">[] = [
- "Regional Pastor",
+  "Regional Pastor",
   "Zonal Pastor",
   "Deacon",
   "Deaconess",
@@ -105,8 +108,8 @@ export default function RSVP() {
   const [step, setStep] = useState<number>(0);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [glowOption, setGlowOption] = useState<string | null>(null);
 
-  // Steps in required order, with conditional role step only once
   const steps: Step[] = useMemo(() => {
     const base: Step[] = [
       { key: "nameBlock", label: "Details" },
@@ -131,7 +134,6 @@ export default function RSVP() {
     return base;
   }, [data.describesYou]);
 
-  // Clamp step index if steps length changes (prevents weird repeats)
   useEffect(() => {
     setStep((s) => Math.min(s, steps.length - 1));
   }, [steps.length]);
@@ -179,8 +181,9 @@ export default function RSVP() {
 
       case "email":
         if (!data.email.trim()) return { ok: false, message: "Please enter your email." };
-        if (!/^\S+@\S+\.\S+$/.test(data.email))
+        if (!/^\S+@\S+\.\S+$/.test(data.email)) {
           return { ok: false, message: "Please enter a valid email address." };
+        }
         return { ok: true };
 
       case "traditional":
@@ -203,7 +206,7 @@ export default function RSVP() {
   };
 
   const handleSubmit = async () => {
-    if (data.website) return; // honeypot
+    if (data.website) return;
 
     setLoading(true);
 
@@ -264,7 +267,6 @@ export default function RSVP() {
                 </div>
               ) : (
                 <>
-                  {/* honeypot */}
                   <input
                     type="text"
                     name="website"
@@ -324,10 +326,17 @@ export default function RSVP() {
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${data.describesYou === opt ? "selected" : ""}`}
+                                  className={`choice-pill ${
+                                    data.describesYou === opt ? "selected" : ""
+                                  } ${glowOption === opt ? "glow" : ""}`}
                                   onClick={() => {
                                     setField("describesYou", opt);
-                                    setTimeout(() => handleNext(), 120);
+                                    setGlowOption(opt);
+
+                                    setTimeout(() => {
+                                      setGlowOption(null);
+                                      next();
+                                    }, 300);
                                   }}
                                 >
                                   {opt}
@@ -339,15 +348,25 @@ export default function RSVP() {
 
                         {current === "churchRole" && (
                           <>
-                            <p className="rsvp-question">Church ministry — what position?</p>
+                            <p className="rsvp-question">Church ministry — what role?</p>
 
                             <div className="choice-grid">
                               {churchRoleOptions.map((opt) => (
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${data.churchRole === opt ? "selected" : ""}`}
-                                  onClick={() => setField("churchRole", opt)}
+                                  className={`choice-pill ${
+                                    data.churchRole === opt ? "selected" : ""
+                                  } ${glowOption === opt ? "glow" : ""}`}
+                                  onClick={() => {
+                                    setField("churchRole", opt);
+                                    setGlowOption(opt);
+
+                                    setTimeout(() => {
+                                      setGlowOption(null);
+                                      next();
+                                    }, 300);
+                                  }}
                                 >
                                   {opt}
                                 </button>
@@ -358,15 +377,25 @@ export default function RSVP() {
 
                         {current === "campusRole" && (
                           <>
-                            <p className="rsvp-question">Campus ministry — what position?</p>
+                            <p className="rsvp-question">Campus ministry — what role?</p>
 
                             <div className="choice-grid">
                               {campusRoleOptions.map((opt) => (
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${data.campusRole === opt ? "selected" : ""}`}
-                                  onClick={() => setField("campusRole", opt)}
+                                  className={`choice-pill ${
+                                    data.campusRole === opt ? "selected" : ""
+                                  } ${glowOption === opt ? "glow" : ""}`}
+                                  onClick={() => {
+                                    setField("campusRole", opt);
+                                    setGlowOption(opt);
+
+                                    setTimeout(() => {
+                                      setGlowOption(null);
+                                      next();
+                                    }, 300);
+                                  }}
                                 >
                                   {opt}
                                 </button>
@@ -394,13 +423,24 @@ export default function RSVP() {
                         {current === "traditional" && (
                           <>
                             <p className="rsvp-question">Are you attending the traditional wedding?</p>
+
                             <div className="choice-grid">
                               {attendOptions.map((opt) => (
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${data.traditional === opt ? "selected" : ""}`}
-                                  onClick={() => setField("traditional", opt)}
+                                  className={`choice-pill ${
+                                    data.traditional === opt ? "selected" : ""
+                                  } ${glowOption === opt ? "glow" : ""}`}
+                                  onClick={() => {
+                                    setField("traditional", opt);
+                                    setGlowOption(opt);
+
+                                    setTimeout(() => {
+                                      setGlowOption(null);
+                                      next();
+                                    }, 300);
+                                  }}
                                 >
                                   {opt}
                                 </button>
@@ -412,13 +452,24 @@ export default function RSVP() {
                         {current === "white" && (
                           <>
                             <p className="rsvp-question">Are you attending the white wedding?</p>
+
                             <div className="choice-grid">
                               {attendOptions.map((opt) => (
                                 <button
                                   type="button"
                                   key={opt}
-                                  className={`choice-pill ${data.white === opt ? "selected" : ""}`}
-                                  onClick={() => setField("white", opt)}
+                                  className={`choice-pill ${
+                                    data.white === opt ? "selected" : ""
+                                  } ${glowOption === opt ? "glow" : ""}`}
+                                  onClick={() => {
+                                    setField("white", opt);
+                                    setGlowOption(opt);
+
+                                    setTimeout(() => {
+                                      setGlowOption(null);
+                                      next();
+                                    }, 300);
+                                  }}
                                 >
                                   {opt}
                                 </button>
