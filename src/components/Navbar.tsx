@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import monogram from "../assets/pd26logo.png"; // <- change this to your actual monogram file
+import monogram from "../assets/pd26logo.png"; 
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,8 +29,8 @@ export default function Navbar() {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/our-story", label: "Our Story" },
     { to: "/events", label: "Events" },
+    { to: "/faqs", label: "FAQs" },
     { to: "/rsvp", label: "RSVP" },
     { to: "/livestream", label: "Livestream" },
   ];
