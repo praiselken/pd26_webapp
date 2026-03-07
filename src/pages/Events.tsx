@@ -31,23 +31,28 @@ export default function Events() {
     <main className="events-page">
       <Navbar />
 
-      <section
-        className="events-hero"
-        style={{ backgroundImage: `url(${hero})` }}
-      >
+      <section className="events-hero">
+        <div
+          className="events-hero-bg"
+          style={{ backgroundImage: `url(${hero})` }}
+        />
         <div className="events-hero-overlay" />
         <div className="events-hero-fade" />
 
         <div className="events-hero-content">
           <p className="events-kicker">Our Wedding Weekend</p>
-          <h1 className="font-playfair events-title">Schedule</h1>
+          <h1 className="events-title">Schedule</h1>
         </div>
       </section>
 
       <section className="events-section">
         <div className="events-container">
           {events.map((event, index) => (
-            <article key={index} className="event-card">
+            <article
+              key={index}
+              className="event-card"
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
               <h2 className="event-heading">{event.title}</h2>
               <div className="event-divider" />
 

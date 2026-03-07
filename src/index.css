@@ -19,9 +19,9 @@
   --radius: 14px;
 
   --font-heading: "Playfair Display", serif;
-  --font-body: "Roboto", sans-serif;
+  --font-body: "OrangeAvenue", "serif";
 
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "OrangeAvenue",
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -1108,10 +1108,18 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   padding: 7.5rem 1.5rem 4.5rem;
+  overflow: hidden;
+}
+
+.events-hero-bg {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center 28%;
   background-repeat: no-repeat;
-  overflow: hidden;
+  transform: scale(1);
+  animation: heroSlowZoom 14s ease-out forwards;
+  will-change: transform;
 }
 
 .events-hero-overlay {
@@ -1127,7 +1135,6 @@ button:focus-visible {
     );
 }
 
-/* this creates the melt into the next section */
 .events-hero-fade {
   position: absolute;
   inset: auto 0 0 0;
@@ -1153,7 +1160,9 @@ button:focus-visible {
 
 .events-kicker {
   margin: 0 0 0.8rem;
+  font-family: var(--font-body);
   font-size: 0.85rem;
+  font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.92);
@@ -1161,14 +1170,14 @@ button:focus-visible {
 
 .events-title {
   margin: 0;
-  font-family: "Yeseva One", serif;
+  font-family: var(--font-heading);
   font-size: clamp(2.8rem, 8vw, 5.2rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #ffffff;
-  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
 }
 
 /* SECTION UNDER HERO */
@@ -1176,15 +1185,14 @@ button:focus-visible {
   position: relative;
   margin-top: -1px;
   padding: 1.5rem 1.25rem 5.5rem;
-  background:
-    linear-gradient(
-      to bottom,
-      #d6bba3 0%,
-      #d9bea6 18%,
-      #dcc3ac 42%,
-      #e5d1bf 75%,
-      #f2e7dc 100%
-    );
+  background: linear-gradient(
+    to bottom,
+    #d6bba3 0%,
+    #d9bea6 18%,
+    #dcc3ac 42%,
+    #e5d1bf 75%,
+    #f2e7dc 100%
+  );
 }
 
 .events-container {
@@ -1204,16 +1212,30 @@ button:focus-visible {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px rgba(33, 26, 29, 0.05);
+
+  opacity: 0;
+  transform: translateY(26px);
+  animation: eventCardReveal 0.85s ease forwards;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(33, 26, 29, 0.08);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  border-color: rgba(200, 169, 106, 0.22);
 }
 
 .event-heading {
   margin: 0;
   font-family: var(--font-heading);
   font-size: clamp(1.6rem, 4.4vw, 2.15rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.1;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   color: var(--ink);
 }
 
@@ -1246,23 +1268,57 @@ button:focus-visible {
   border: 1px solid rgba(33, 26, 29, 0.08);
   color: var(--ink);
   margin-top: 0.15rem;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.event-card:hover .event-icon-wrap {
+  transform: translateY(-2px);
+  color: var(--champagne);
+  border-color: rgba(200, 169, 106, 0.35);
+  background: rgba(255, 255, 255, 0.52);
 }
 
 .event-info h3 {
   margin: 0;
   font-family: var(--font-heading);
   font-size: clamp(1.45rem, 4vw, 1.95rem);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.18;
+  letter-spacing: 0.02em;
   color: var(--ink);
 }
 
 .event-info p {
-  font-family: var(--font-body);
   margin: 0.3rem 0 0;
-  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.5vw, 1.08rem);
   line-height: 1.65;
   color: rgba(33, 26, 29, 0.72);
+}
+
+/* ANIMATIONS */
+@keyframes heroSlowZoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes eventCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* MOBILE */
@@ -1270,6 +1326,9 @@ button:focus-visible {
   .events-hero {
     min-height: 46vh;
     padding: 6.25rem 1rem 3.5rem;
+  }
+
+  .events-hero-bg {
     background-position: center 24%;
   }
 
@@ -1298,5 +1357,18 @@ button:focus-visible {
 
   .event-divider {
     margin: 0.75rem 0 1.15rem;
+  }
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+  .events-hero-bg,
+  .event-card,
+  .event-card:hover,
+  .event-icon-wrap,
+  .event-card:hover .event-icon-wrap {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
