@@ -42,6 +42,7 @@ export default function Events() {
         <div className="events-hero-content">
           <p className="events-kicker">Our Wedding Weekend</p>
           <h1 className="events-title">Schedule</h1>
+          <div className="faq-hero-divider" />
         </div>
       </section>
 
