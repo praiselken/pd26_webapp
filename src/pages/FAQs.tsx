@@ -43,6 +43,11 @@ const faqItems: FAQItem[] = [
     custom: true,
   },
   {
+    question: "What is the aso ebi details?",
+    answer:
+      "After you RSVP, you will receive an email with details on how to order aso ebi for the traditional ceremony. You can also place an order on the Aso Ebi page.",
+  },
+  {
     question: "What is the wedding colour theme?",
     custom: true,
   },

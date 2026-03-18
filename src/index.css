@@ -1994,3 +1994,368 @@ button:focus-visible {
     font-size: 0.96rem;
   }
 }
+
+/* =========================
+   ASO EBI PAGE
+========================= */
+
+.asoebi-page {
+  background: var(--ivory);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.asoebi-hero {
+  position: relative;
+  min-height: 58vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.asoebi-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(33, 26, 29, 0.42) 0%,
+    rgba(199, 107, 122, 0.12) 55%,
+    rgba(247, 241, 232, 0.18) 100%
+  );
+}
+
+.asoebi-hero-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 220px;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 241, 232, 0) 0%,
+    rgba(247, 241, 232, 0.72) 65%,
+    var(--ivory) 100%
+  );
+}
+
+.asoebi-hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 8.5rem 1.25rem 4rem;
+}
+
+.asoebi-eyebrow {
+  margin-bottom: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  color: var(--champagne);
+}
+
+.asoebi-hero h1 {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  line-height: 0.95;
+  font-weight: 600;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.asoebi-subtext {
+  margin: 0 auto;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.94);
+  line-height: 1.8;
+  font-size: 1rem;
+  text-wrap: pretty;
+}
+
+.asoebi-section {
+  padding: 3.5rem 1.25rem;
+}
+
+.asoebi-section-soft {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.24),
+    rgba(255, 255, 255, 0.4)
+  );
+}
+
+.asoebi-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.asoebi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.asoebi-card,
+.asoebi-form-card {
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 14px 40px rgba(33, 26, 29, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.asoebi-card h2,
+.asoebi-form-card h2 {
+  margin: 0 0 1rem;
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.asoebi-card p,
+.asoebi-form-heading p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.asoebi-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.asoebi-mini-heading {
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  color: var(--rose);
+}
+
+.asoebi-form-heading {
+  margin-bottom: 1.5rem;
+}
+
+.asoebi-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  margin-bottom: 0.45rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0.95rem 1rem;
+  color: var(--ink);
+  font-size: 0.98rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  outline: none;
+  appearance: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(199, 107, 122, 0.12);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.asoebi-actions {
+  margin-top: 1.5rem;
+}
+
+.asoebi-submit-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.6rem;
+  background: var(--rose);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.25s ease;
+}
+
+.asoebi-submit-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.94;
+}
+
+.asoebi-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.asoebi-status {
+  margin-top: 1rem;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.hidden-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .asoebi-grid,
+  .asoebi-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .asoebi-section {
+    padding: 3rem 1rem;
+  }
+
+  .asoebi-card,
+  .asoebi-form-card {
+    padding: 1.35rem;
+    border-radius: 18px;
+  }
+
+  .asoebi-hero {
+    min-height: 54vh;
+    background-position: center;
+  }
+
+  .asoebi-hero-content {
+    padding: 7.5rem 1rem 3rem;
+  }
+
+  .asoebi-hero h1 {
+    font-size: clamp(2.2rem, 9vw, 3.5rem);
+  }
+
+  .asoebi-subtext {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 640px) {
+  .asoebi-hero {
+    min-height: 50vh;
+    align-items: flex-end;
+  }
+
+  .asoebi-hero-fade {
+    height: 160px;
+  }
+
+  .asoebi-hero-content {
+    padding: 6.75rem 1rem 2.25rem;
+    max-width: 100%;
+  }
+
+  .asoebi-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    margin-bottom: 0.75rem;
+  }
+
+  .asoebi-hero h1 {
+    font-size: clamp(2rem, 11vw, 2.8rem);
+    margin-bottom: 0.85rem;
+  }
+
+  .asoebi-subtext {
+    font-size: 0.94rem;
+    line-height: 1.65;
+    max-width: 100%;
+  }
+
+  .asoebi-section {
+    padding: 2.25rem 0.9rem;
+  }
+
+  .asoebi-card,
+  .asoebi-form-card {
+    padding: 1.15rem;
+    border-radius: 16px;
+  }
+
+  .asoebi-card h2,
+  .asoebi-form-card h2 {
+    font-size: 1.45rem;
+  }
+
+  .asoebi-card p,
+  .asoebi-form-heading p,
+  .asoebi-list {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .asoebi-form-grid {
+    gap: 0.9rem;
+  }
+
+  .form-field label {
+    font-size: 0.92rem;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    padding: 0.9rem 0.9rem;
+    font-size: 16px; /* prevents iPhone zoom on focus */
+    border-radius: 10px;
+  }
+
+  .asoebi-submit-btn {
+    width: 100%;
+    padding: 1rem 1.2rem;
+  }
+
+  .asoebi-status {
+    font-size: 0.94rem;
+  }
+}
