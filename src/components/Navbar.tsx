@@ -1,10 +1,15 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import monogram from "../assets/img/PD.png"; 
+import monogram from "../assets/img/PD.png";
+
+type NavItem = {
+  to: string;
+  label: string;
+};
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -13,26 +18,30 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [location.pathname]);
+  }, [location]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
 
-  const navLinks = [
+  const navLinks: NavItem[] = [
     { to: "/", label: "Home" },
     { to: "/events", label: "Events" },
     { to: "/faqs", label: "FAQs" },
     { to: "/rsvp", label: "RSVP" },
-      { to: "/aso-ebi", label: "Aso Ebi" },
+    { to: "/aso-ebi", label: "Aso Ebi" },
     { to: "/livestream", label: "Livestream" },
   ];
 
@@ -44,11 +53,12 @@ export default function Navbar() {
             <img src={monogram} alt="PD26 monogram" className="nav-logo-img" />
           </NavLink>
 
-          <nav className="nav-links" aria-label="Primary">
+          <nav className="nav-links" aria-label="Primary navigation">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
+                end={link.to === "/"}
                 className={({ isActive }) =>
                   isActive ? "nav-link active" : "nav-link"
                 }
@@ -59,11 +69,12 @@ export default function Navbar() {
           </nav>
 
           <button
+            type="button"
             className={`nav-toggle ${mobileOpen ? "open" : ""}`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setMobileOpen((prev) => !prev)}
-            type="button"
           >
             <span />
             <span />
@@ -75,15 +86,20 @@ export default function Navbar() {
       <div
         className={`mobile-overlay ${mobileOpen ? "show" : ""}`}
         onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
       />
 
-      <aside className={`mobile-drawer ${mobileOpen ? "open" : ""}`}>
+      <aside
+        id="mobile-navigation"
+        className={`mobile-drawer ${mobileOpen ? "open" : ""}`}
+        aria-hidden={!mobileOpen}
+      >
         <div className="mobile-drawer-top">
           <button
+            type="button"
             className="mobile-close"
             onClick={() => setMobileOpen(false)}
             aria-label="Close menu"
-            type="button"
           >
             ×
           </button>
@@ -101,11 +117,12 @@ export default function Navbar() {
           />
         </NavLink>
 
-        <nav className="mobile-drawer-links" aria-label="Mobile Navigation">
+        <nav className="mobile-drawer-links" aria-label="Mobile navigation">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
+              end={link.to === "/"}
               className={({ isActive }) =>
                 isActive
                   ? "mobile-drawer-link active"

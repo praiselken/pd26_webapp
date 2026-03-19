@@ -1,15 +1,38 @@
 import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import Navbar from "../components/Navbar";
-import hero from "../assets/hands.jpg"; // replace later with an aso ebi image if you want
+import hero from "../assets/hands.jpg";
 
-const initialForm = {
+type AsoEbiFormData = {
+  fullName: string;
+  email: string;
+  phone: string;
+  category: string;
+  outfitType: string;
+  sizePreference: string;
+  quantity: number;
+  tailoringRequired: string;
+  bustChest: string;
+  waist: string;
+  hips: string;
+  shoulder: string;
+  sleeveLength: string;
+  dressTopLength: string;
+  skirtTrouserLength: string;
+  height: string;
+  pickupOrDelivery: string;
+  notes: string;
+  botcheck: string;
+};
+
+const initialForm: AsoEbiFormData = {
   fullName: "",
   email: "",
   phone: "",
   category: "",
   outfitType: "",
   sizePreference: "",
-  quantity: "1",
+  quantity: 1,
   tailoringRequired: "Yes",
   bustChest: "",
   waist: "",
@@ -25,20 +48,35 @@ const initialForm = {
 };
 
 export default function AsoEbi() {
-  const [formData, setFormData] = useState(initialForm);
-  const [status, setStatus] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<AsoEbiFormData>(initialForm);
+  const [status, setStatus] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  function handleChange(e) {
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === "quantity" ? Number(value) || 1 : value,
     }));
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (formData.botcheck) {
+      return;
+    }
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
+
+    if (!accessKey) {
+      setStatus("Form configuration is missing. Please try again later.");
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus("Sending your order...");
 
@@ -50,23 +88,25 @@ export default function AsoEbi() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          access_key: accessKey,
           subject: "PD26 Aso Ebi Order Submission",
           from_name: "Perfectly Divine 2026",
-          // replace with the tailor's email in your Web3Forms dashboard/settings if needed
           ...formData,
         }),
       });
 
-      const result = await response.json();
+      const result: { success?: boolean; message?: string } =
+        await response.json();
 
       if (result.success) {
-        setStatus("Thank you — your Aso Ebi order has been submitted successfully.");
+        setStatus(
+          "Thank you — your Aso Ebi order has been submitted successfully."
+        );
         setFormData(initialForm);
       } else {
-        setStatus("Sorry, something went wrong. Please try again.");
+        setStatus(result.message || "Sorry, something went wrong. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setStatus("Sorry, something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -87,6 +127,7 @@ export default function AsoEbi() {
         <div className="asoebi-hero-content">
           <p className="asoebi-eyebrow">Perfectly Divine 2026</p>
           <h1>Aso Ebi</h1>
+          <div className="faq-hero-divider" />
           <p className="asoebi-subtext">
             We would love for you to celebrate with us in coordinated Nigerian
             wedding attire. Please read the details below and submit your order
@@ -171,7 +212,7 @@ export default function AsoEbi() {
                 value={formData.botcheck}
                 onChange={handleChange}
                 className="hidden-field"
-                tabIndex="-1"
+                tabIndex={-1}
                 autoComplete="off"
               />
 
@@ -264,7 +305,7 @@ export default function AsoEbi() {
                     id="quantity"
                     type="number"
                     name="quantity"
-                    min="1"
+                    min={1}
                     value={formData.quantity}
                     onChange={handleChange}
                     required
@@ -352,7 +393,9 @@ export default function AsoEbi() {
                 </div>
 
                 <div className="form-field">
-                  <label htmlFor="skirtTrouserLength">Skirt / Trouser Length</label>
+                  <label htmlFor="skirtTrouserLength">
+                    Skirt / Trouser Length
+                  </label>
                   <input
                     id="skirtTrouserLength"
                     type="text"
@@ -374,7 +417,9 @@ export default function AsoEbi() {
                 </div>
 
                 <div className="form-field form-field-full">
-                  <label htmlFor="pickupOrDelivery">Pickup or Delivery Preference</label>
+                  <label htmlFor="pickupOrDelivery">
+                    Pickup or Delivery Preference
+                  </label>
                   <input
                     id="pickupOrDelivery"
                     type="text"
@@ -390,7 +435,7 @@ export default function AsoEbi() {
                   <textarea
                     id="notes"
                     name="notes"
-                    rows="6"
+                    rows={6}
                     placeholder="Add style notes, preferred fit, gele request, special measurements, or any extra information here."
                     value={formData.notes}
                     onChange={handleChange}
