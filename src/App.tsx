@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Events from "./pages/Events";
-import FAQs from "./pages/FAQS";
+import FAQs from "./pages/FAQs";
 import RSVP from "./pages/RSVP";
 import AsoEbi from "./pages/AsoEbi";
 import Livestream from "./pages/Livestream";
