@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
+import type { ReactNode, FormEvent, ChangeEvent } from "react";
 import bg from "../assets/hands.jpg";
 import Navbar from "./Navbar";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   heading?: string;
   subheading?: string;
   storageKey?: string;
@@ -17,25 +18,24 @@ export default function PasswordGate({
   storageKey = "pd26_gate_access",
   password,
 }: Props) {
-  const [input, setInput] = useState("");
-  const [allowed, setAllowed] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [input, setInput] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [allowedKeys, setAllowedKeys] = useState<Record<string, boolean>>(() => {
+    return {
+      [storageKey]: sessionStorage.getItem(storageKey) === "true",
+    };
+  });
+
+  const allowed = allowedKeys[storageKey] ?? false;
 
   const required = useMemo(() => {
     return password || import.meta.env.VITE_PD26_GATE_PASSWORD || "PD26";
   }, [password]);
 
-  // Restore access during session
   useEffect(() => {
-    const cached = sessionStorage.getItem(storageKey);
-    if (cached === "true") setAllowed(true);
-  }, [storageKey]);
+    const timer = window.setTimeout(() => {
+      if (!allowed) return;
 
-  // When unlocked, scroll and focus first input
-  useEffect(() => {
-    if (!allowed) return;
-
-    setTimeout(() => {
       const formInput = document.querySelector(
         ".form-input"
       ) as HTMLInputElement | null;
@@ -49,14 +49,19 @@ export default function PasswordGate({
         behavior: "smooth",
       });
     }, 120);
+
+    return () => window.clearTimeout(timer);
   }, [allowed]);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (input.trim() === required) {
-      setAllowed(true);
       sessionStorage.setItem(storageKey, "true");
+      setAllowedKeys((prev) => ({
+        ...prev,
+        [storageKey]: true,
+      }));
       return;
     }
 
@@ -65,8 +70,15 @@ export default function PasswordGate({
 
   const reset = () => {
     sessionStorage.removeItem(storageKey);
-    setAllowed(false);
+    setAllowedKeys((prev) => ({
+      ...prev,
+      [storageKey]: false,
+    }));
     setInput("");
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
   };
 
   if (allowed) {
@@ -76,6 +88,7 @@ export default function PasswordGate({
   return (
     <>
       <Navbar />
+
       <section className="rsvp-hero">
         <img src={bg} alt="Wedding" className="rsvp-bg" />
         <div className="rsvp-overlay" />
@@ -85,43 +98,46 @@ export default function PasswordGate({
             <h1 className="font-orange text-4xl mb-2">{heading}</h1>
             <p className="font-playfair italic mb-6">{subheading}</p>
 
-          <form onSubmit={submit} className="rsvp-form">
-            <div className="form-group">
-              <label className="form-label">Password</label>
+            <form onSubmit={submit} className="rsvp-form">
+              <div className="form-group">
+                <label className="form-label" htmlFor="gate-password">
+                  Password
+                </label>
 
-             <input
-  type={showPassword ? "text" : "password"}
-  value={input}
-  onChange={(e) => setInput(e.target.value)}
-  className="password-input"
-/>
+                <input
+                  id="gate-password"
+                  type={showPassword ? "text" : "password"}
+                  value={input}
+                  onChange={handleInputChange}
+                  className="password-input"
+                  autoComplete="off"
+                />
 
-<button
-  type="button"
-  className="show-password-btn"
-  onClick={() => setShowPassword((s) => !s)}
->
-  {showPassword ? "Hide password" : "Show password"}
-</button>
-            </div>
+                <button
+                  type="button"
+                  className="show-password-btn"
+                  onClick={() => setShowPassword((s) => !s)}
+                >
+                  {showPassword ? "Hide password" : "Show password"}
+                </button>
+              </div>
 
-            <button type="submit" className="btn btn-primary w-full">
-              Enter
-            </button>
+              <button type="submit" className="btn btn-primary w-full">
+                Enter
+              </button>
 
-            <button
-              type="button"
-              className="btn btn-secondary w-full"
-              style={{ marginTop: 10 }}
-              onClick={reset}
-            >
-              Clear
-            </button>
-          </form>
+              <button
+                type="button"
+                className="btn btn-secondary w-full"
+                style={{ marginTop: 10 }}
+                onClick={reset}
+              >
+                Clear
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </section>
-
+      </section>
     </>
   );
 }
