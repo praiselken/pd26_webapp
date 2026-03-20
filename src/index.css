@@ -19,10 +19,19 @@
   --radius: 14px;
 
   --font-heading: "Playfair Display", serif;
-  --font-body: "OrangeAvenue", "serif";
+  --font-body: "OrangeAvenue", serif;
 
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "OrangeAvenue",
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "OrangeAvenue",
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Liberation Sans",
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -111,8 +120,11 @@ button {
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease,
-    border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 button:active {
@@ -154,45 +166,8 @@ button:focus-visible {
 
 /* ===============================
    PD26 CTA LINKS (OUTLINE)
-=================================*/
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 28px;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: transparent;
-  color: var(--ivory);
-  border: 1.5px solid var(--ivory);
-  border-radius: 999px;
-  cursor: pointer;
-  opacity: 1;
-  transition: color 0.25s ease, border-color 0.25s ease, transform 0.15s ease,
-    opacity 0.25s ease, background 0.25s ease;
-}
-
-.btn-outline:hover {
-  background: rgba(200, 169, 106, 0.9);
-  color: white;
-  border-color: rgba(200, 169, 106, 0.9);
-  opacity: 1;
-}
-
-.btn-outline:active {
-  background: rgba(170, 140, 80, 0.95);
-  border-color: rgba(170, 140, 80, 0.95);
-  transform: scale(0.96);
-}
-
-.btn-outline:focus-visible {
-  outline: 3px solid rgba(200, 169, 106, 0.35);
-  outline-offset: 3px;
-}
-
+================================= */
+.btn-outline,
 .btn-outline-dark {
   display: inline-flex;
   align-items: center;
@@ -204,13 +179,43 @@ button:focus-visible {
   text-transform: uppercase;
   text-decoration: none;
   background: transparent;
-  color: rgba(170, 140, 80, 0.95);
-  border: 1.5px solid rgba(170, 140, 80, 0.95);
   border-radius: 999px;
   cursor: pointer;
   opacity: 1;
-  transition: color 0.25s ease, border-color 0.25s ease, transform 0.15s ease,
-    opacity 0.25s ease, background 0.25s ease;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease,
+    opacity 0.25s ease,
+    background 0.25s ease;
+}
+
+.btn-outline {
+  color: var(--ivory);
+  border: 1.5px solid var(--ivory);
+}
+
+.btn-outline:hover {
+  background: rgba(200, 169, 106, 0.9);
+  color: white;
+  border-color: rgba(200, 169, 106, 0.9);
+}
+
+.btn-outline:active {
+  background: rgba(170, 140, 80, 0.95);
+  border-color: rgba(170, 140, 80, 0.95);
+  transform: scale(0.96);
+}
+
+.btn-outline:focus-visible,
+.btn-outline-dark:focus-visible {
+  outline: 3px solid rgba(200, 169, 106, 0.35);
+  outline-offset: 3px;
+}
+
+.btn-outline-dark {
+  color: rgba(170, 140, 80, 0.95);
+  border: 1.5px solid rgba(170, 140, 80, 0.95);
 }
 
 .btn-outline-dark:hover {
@@ -223,11 +228,6 @@ button:focus-visible {
   background: rgba(150, 120, 65, 0.95);
   border-color: rgba(150, 120, 65, 0.95);
   transform: scale(0.96);
-}
-
-.btn-outline-dark:focus-visible {
-  outline: 3px solid rgba(200, 169, 106, 0.35);
-  outline-offset: 3px;
 }
 
 /* =========================
@@ -291,7 +291,8 @@ button:focus-visible {
 }
 
 .hero-title-shadow {
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4),
+  text-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.4),
     0 10px 30px rgba(0, 0, 0, 0.3),
     0 0 18px rgba(255, 255, 255, 0.08);
 }
@@ -447,14 +448,16 @@ button:focus-visible {
 
 /* =========================
    NAVBAR
-   ========================= */
+========================= */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1200;
-  transition: background-color 0.25s ease, box-shadow 0.25s ease,
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
     backdrop-filter 0.25s ease;
 }
 
@@ -464,6 +467,11 @@ button:focus-visible {
   box-shadow: 0 10px 30px rgba(33, 26, 29, 0.08);
 }
 
+.nav,
+.nav * {
+  font-family: "Playfair Display", serif;
+}
+
 .nav-inner {
   width: min(var(--container), calc(100% - 32px));
   margin: 0 auto;
@@ -471,29 +479,50 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1300;
+  flex-shrink: 0;
   font-size: 1.25rem;
   letter-spacing: 0.08em;
   color: var(--white);
-  position: relative;
-  z-index: 1300;
 }
 
 .nav-scrolled .nav-logo {
   color: var(--ink);
 }
 
+.nav-logo-img {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+  margin-left: 1.25rem;
+  overflow: visible;
 }
 
 .nav-link {
   color: var(--white);
   transition: color 0.2s ease, opacity 0.2s ease;
+  font-family: "Playfair Display", serif;
+  white-space: nowrap;
+  font-size: 0.95rem;
+  flex-shrink: 1;
 }
 
 .nav-scrolled .nav-link {
@@ -510,7 +539,7 @@ button:focus-visible {
 
 /* =========================
    MOBILE TOGGLE
-   ========================= */
+========================= */
 .nav-toggle {
   display: none;
   width: 48px;
@@ -520,6 +549,7 @@ button:focus-visible {
   padding: 0;
   position: relative;
   z-index: 1301;
+  flex-shrink: 0;
 }
 
 .nav-toggle span {
@@ -528,7 +558,9 @@ button:focus-visible {
   height: 2px;
   margin: 5px auto;
   background: var(--white);
-  transition: transform 0.25s ease, opacity 0.25s ease,
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
     background-color 0.25s ease;
 }
 
@@ -549,91 +581,8 @@ button:focus-visible {
 }
 
 /* =========================
-   NAVBAR FONT
-   ========================= */
-.nav,
-.nav * {
-  font-family: "Playfair Display", serif;
-}
-
-/* Top navbar logo */
-.nav-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1300;
-}
-
-.nav-logo-img {
-  width: 60px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-/* Desktop nav links */
-.nav-link {
-  color: var(--white);
-  transition: color 0.2s ease, opacity 0.2s ease;
-  font-family: "Playfair Display", serif;
-}
-
-.nav-scrolled .nav-link {
-  color: var(--ink);
-}
-
-.nav-link:hover {
-  color: var(--rose);
-}
-
-.nav-link.active {
-  color: #9f5261;
-}
-
-/* =========================
-   MOBILE DRAWER LOGO
-   ========================= */
-.mobile-drawer-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 1.6rem 0;
-}
-
-.mobile-drawer-logo-img {
-  width: 90px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.mobile-drawer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  padding-top: 0.4rem;
-}
-
-.mobile-drawer-link {
-  font-size: 1.2rem;
-  color: var(--ink);
-  transition: color 0.2s ease, transform 0.2s ease;
-  font-family: "Playfair Display", serif;
-}
-
-.mobile-drawer-link:hover {
-  color: var(--rose);
-  transform: translateX(-4px);
-}
-
-.mobile-drawer-link.active {
-  color: #9f5261;
-}
-
-/* =========================
    MOBILE OVERLAY
-   ========================= */
+========================= */
 .mobile-overlay {
   position: fixed;
   inset: 0;
@@ -653,7 +602,7 @@ button:focus-visible {
 
 /* =========================
    MOBILE DRAWER
-   ========================= */
+========================= */
 .mobile-drawer {
   position: fixed;
   top: 0;
@@ -690,6 +639,20 @@ button:focus-visible {
   padding: 0;
 }
 
+.mobile-drawer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1.6rem 0;
+}
+
+.mobile-drawer-logo-img {
+  width: 90px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .mobile-drawer-links {
   display: flex;
   flex-direction: column;
@@ -701,6 +664,7 @@ button:focus-visible {
   font-size: 1.2rem;
   color: var(--ink);
   transition: color 0.2s ease, transform 0.2s ease;
+  font-family: "Playfair Display", serif;
 }
 
 .mobile-drawer-link:hover {
@@ -714,7 +678,7 @@ button:focus-visible {
 
 /* =========================
    RESPONSIVE NAV
-   ========================= */
+========================= */
 @media (max-width: 900px) {
   .nav-links {
     display: none;
@@ -728,7 +692,6 @@ button:focus-visible {
 /* =========================
    WELCOME POPUP
 ========================= */
-
 .welcome-popup-overlay {
   position: fixed;
   inset: 0;
@@ -1213,14 +1176,12 @@ button:focus-visible {
 /* =========================
    EVENTS PAGE
 ========================= */
-
 .events-page {
   min-height: 100vh;
   background: var(--ivory);
   color: var(--ink);
 }
 
-/* HERO */
 .events-hero {
   position: relative;
   min-height: 56vh;
@@ -1300,7 +1261,6 @@ button:focus-visible {
   text-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
 }
 
-/* SECTION UNDER HERO */
 .events-section {
   position: relative;
   margin-top: -1px;
@@ -1316,7 +1276,6 @@ button:focus-visible {
   gap: 1.8rem;
 }
 
-/* CARDS */
 .event-card {
   padding: 2rem 1.4rem;
   border: 1px solid rgba(33, 26, 29, 0.08);
@@ -1325,7 +1284,6 @@ button:focus-visible {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px rgba(33, 26, 29, 0.05);
-
   opacity: 0;
   transform: translateY(26px);
   animation: eventCardReveal 0.85s ease forwards;
@@ -1414,7 +1372,6 @@ button:focus-visible {
   color: rgba(33, 26, 29, 0.72);
 }
 
-/* ANIMATIONS */
 @keyframes heroSlowZoom {
   from {
     transform: scale(1);
@@ -1435,7 +1392,6 @@ button:focus-visible {
   }
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .events-hero {
     min-height: 46vh;
@@ -1474,7 +1430,6 @@ button:focus-visible {
   }
 }
 
-/* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
   .events-hero-bg,
   .event-card,
@@ -1486,17 +1441,16 @@ button:focus-visible {
     transform: none !important;
   }
 }
+
 /* =========================
    FAQS PAGE
 ========================= */
-
 .faqs-page {
   background: var(--ivory);
   color: var(--ink);
   min-height: 100vh;
 }
 
-/* HERO */
 .faqs-hero {
   position: relative;
   min-height: 42vh;
@@ -1576,7 +1530,6 @@ button:focus-visible {
   );
 }
 
-/* MAIN SECTION */
 .faqs-main {
   position: relative;
   overflow: hidden;
@@ -1603,7 +1556,6 @@ button:focus-visible {
   margin: 0 auto;
 }
 
-/* OUTER CARD */
 .faqs-card {
   padding: 0.85rem;
   border: 1px solid rgba(33, 26, 29, 0.08);
@@ -1614,7 +1566,6 @@ button:focus-visible {
   box-shadow: 0 20px 50px rgba(33, 26, 29, 0.08);
 }
 
-/* ACCORDION */
 .faq-accordion-item {
   border-bottom: 1px solid rgba(33, 26, 29, 0.08);
 }
@@ -1721,8 +1672,6 @@ button:focus-visible {
   margin-top: 0.7rem;
 }
 
-/* COLOUR THEME */
-/* COLOUR THEME */
 .faq-colours {
   margin-top: 1rem;
   display: flex;
@@ -1757,7 +1706,6 @@ button:focus-visible {
     0 4px 14px rgba(33, 26, 29, 0.05);
 }
 
-/* ANIMATION */
 .fade-up {
   opacity: 0;
   transform: translateY(24px);
@@ -1775,7 +1723,6 @@ button:focus-visible {
   }
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .faqs-hero {
     min-height: 34vh;
@@ -1816,7 +1763,7 @@ button:focus-visible {
     padding-bottom: 1.15rem;
   }
 
-    .faq-colour-row {
+  .faq-colour-row {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1840,14 +1787,12 @@ button:focus-visible {
 /* =========================
    LIVESTREAM PAGE
 ========================= */
-
 .livestream-page {
   background: var(--ivory);
   color: var(--ink);
   min-height: 100vh;
 }
 
-/* HERO */
 .livestream-hero {
   position: relative;
   min-height: 42vh;
@@ -1930,13 +1875,16 @@ button:focus-visible {
   color: rgba(255, 255, 255, 0.94);
 }
 
-/* SECTION */
 .livestream-section {
   position: relative;
   padding: 4.5rem 1.5rem 6rem;
   background:
     radial-gradient(circle at top, rgba(199, 107, 122, 0.08), transparent 38%),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.32), rgba(247, 241, 232, 0.96));
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.32),
+      rgba(247, 241, 232, 0.96)
+    );
 }
 
 .livestream-container {
@@ -1970,7 +1918,6 @@ button:focus-visible {
   margin: 0;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   .livestream-hero {
     min-height: 38vh;
@@ -1998,7 +1945,6 @@ button:focus-visible {
 /* =========================
    ASO EBI PAGE
 ========================= */
-
 .asoebi-page {
   background: var(--ivory);
   color: var(--ink);
@@ -2237,10 +2183,6 @@ button:focus-visible {
   pointer-events: none;
 }
 
-/* =========================
-   TABLET
-========================= */
-
 @media (max-width: 900px) {
   .asoebi-grid,
   .asoebi-form-grid {
@@ -2275,10 +2217,6 @@ button:focus-visible {
     line-height: 1.7;
   }
 }
-
-/* =========================
-   MOBILE
-========================= */
 
 @media (max-width: 640px) {
   .asoebi-hero {
@@ -2346,7 +2284,7 @@ button:focus-visible {
   .form-field select,
   .form-field textarea {
     padding: 0.9rem 0.9rem;
-    font-size: 16px; /* prevents iPhone zoom on focus */
+    font-size: 16px;
     border-radius: 10px;
   }
 

@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import monogram from "../assets/img/PD.png";
 
@@ -8,9 +8,8 @@ type NavItem = {
 };
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState<boolean>(false);
-  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,16 +24,16 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [location]);
-
-  useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+  };
 
   const navLinks: NavItem[] = [
     { to: "/", label: "Home" },
@@ -49,7 +48,12 @@ export default function Navbar() {
     <>
       <header className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
         <div className="nav-inner">
-          <NavLink to="/" className="nav-logo" aria-label="Go to homepage">
+          <NavLink
+            to="/"
+            className="nav-logo"
+            aria-label="Go to homepage"
+            onClick={closeMobileMenu}
+          >
             <img src={monogram} alt="PD26 monogram" className="nav-logo-img" />
           </NavLink>
 
@@ -85,7 +89,7 @@ export default function Navbar() {
 
       <div
         className={`mobile-overlay ${mobileOpen ? "show" : ""}`}
-        onClick={() => setMobileOpen(false)}
+        onClick={closeMobileMenu}
         aria-hidden="true"
       />
 
@@ -98,7 +102,7 @@ export default function Navbar() {
           <button
             type="button"
             className="mobile-close"
-            onClick={() => setMobileOpen(false)}
+            onClick={closeMobileMenu}
             aria-label="Close menu"
           >
             ×
@@ -109,6 +113,7 @@ export default function Navbar() {
           to="/"
           className="mobile-drawer-logo"
           aria-label="Go to homepage"
+          onClick={closeMobileMenu}
         >
           <img
             src={monogram}
@@ -123,6 +128,7 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               end={link.to === "/"}
+              onClick={closeMobileMenu}
               className={({ isActive }) =>
                 isActive
                   ? "mobile-drawer-link active"
