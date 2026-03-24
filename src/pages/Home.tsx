@@ -45,6 +45,15 @@ export default function Home() {
       <a href="/livestream" className="btn btn-outline">
         <span>Livestream</span>
       </a>
+
+      <a href="/aso-ebi" className="btn btn-outline">
+        <span>Aso Ebi</span>
+      </a>
+
+      <a href="/gallery" className="btn btn-outline">
+        <span>Gallery</span>
+      </a>
+
     </div>
   </div>
 </section>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import Navbar from "../components/Navbar";
-import hero from "../assets/hands.jpg";
+import hero from "../assets/IMG_8785.jpg";
 
 type AsoEbiFormData = {
   fullName: string;
@@ -125,7 +125,7 @@ export default function AsoEbi() {
         <div className="asoebi-hero-fade" />
 
         <div className="asoebi-hero-content">
-          <p className="asoebi-eyebrow">Perfectly Divine 2026</p>
+          <p className="asoebi-eyebrow">Dress the Part</p>
           <h1>Aso Ebi</h1>
           <div className="faq-hero-divider" />
           <p className="asoebi-subtext">
@@ -177,19 +177,7 @@ export default function AsoEbi() {
             </ul>
           </article>
 
-          <article className="asoebi-card">
-            <h2>Measurements to Include</h2>
-            <ul className="asoebi-list">
-              <li>Bust / chest</li>
-              <li>Waist</li>
-              <li>Hips</li>
-              <li>Shoulder</li>
-              <li>Sleeve length</li>
-              <li>Dress / top length</li>
-              <li>Skirt / trouser length</li>
-              <li>Height</li>
-            </ul>
-          </article>
+
         </div>
       </section>
 
