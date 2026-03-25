@@ -100,7 +100,7 @@ export default function AsoEbi() {
 
       if (result.success) {
         setStatus(
-          "Thank you — your Aso Ebi order has been submitted successfully."
+          "Thank you — your Aso Ebi order has been submitted successfully. Please see email areteconsultingbiz@gmail.com for futher information and updates."
         );
         setFormData(initialForm);
       } else {
@@ -154,12 +154,11 @@ export default function AsoEbi() {
 
           <article className="asoebi-card">
             <h2>Important Information</h2>
-            <ul className="asoebi-list">
-              <li>Orders must be submitted before the stated deadline</li>
-              <li>Please ensure measurements are accurate before sending</li>
-              <li>The tailor may contact you for clarification if needed</li>
-              <li>Payment and collection details will be shared separately</li>
-            </ul>
+              <p>Orders must be submitted before the stated deadline
+              Please ensure measurements are accurate before sending <br/>
+              The tailor may contact you for clarification if needed
+              Payment and collection details will be shared separately</p>
+
           </article>
         </div>
       </section>
@@ -167,14 +166,9 @@ export default function AsoEbi() {
       <section className="asoebi-section asoebi-section-soft">
         <div className="asoebi-container asoebi-grid">
           <article className="asoebi-card">
-            <h2>Available Options</h2>
-            <ul className="asoebi-list">
-              <li>Ladies dress tailoring</li>
-              <li>Men’s agbada or senator styles</li>
-              <li>Children’s outfits</li>
-              <li>Fabric-only orders</li>
-              <li>Headwrap / gele coordination</li>
-            </ul>
+            <h2>Fabric information</h2>
+ <p>Fabric orders are 4 yards per order. <br/>If you require additional fabric, please note that a second order will be required.</p>
+
           </article>
 
 
@@ -242,7 +236,7 @@ export default function AsoEbi() {
                 </div>
 
                 <div className="form-field">
-                  <label htmlFor="category">Category</label>
+                  <label htmlFor="category">Fabric Order</label>
                   <select
                     id="category"
                     name="category"
@@ -250,15 +244,27 @@ export default function AsoEbi() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select category</option>
-                    <option value="Adult Female">Adult Female</option>
-                    <option value="Adult Male">Adult Male</option>
-                    <option value="Child">Child</option>
+                    <option value="">Select option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                   </select>
                 </div>
 
+                                <div className="form-field">
+                  <label htmlFor="quantity">Quantity</label>
+                  <input
+                    id="quantity"
+                    type="number"
+                    name="quantity"
+                    min={1}
+                    value={formData.quantity}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
                 <div className="form-field">
-                  <label htmlFor="outfitType">Outfit Type</label>
+                  <label htmlFor="outfitType">Gele Order</label>
                   <select
                     id="outfitType"
                     name="outfitType"
@@ -266,26 +272,12 @@ export default function AsoEbi() {
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Select outfit type</option>
-                    <option value="Ladies Dress">Ladies Dress</option>
-                    <option value="Men’s Agbada">Men’s Agbada</option>
-                    <option value="Senator Style">Senator Style</option>
-                    <option value="Children’s Outfit">Children’s Outfit</option>
-                    <option value="Fabric Only">Fabric Only</option>
+                    <option value="">Select option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
                   </select>
                 </div>
 
-                <div className="form-field">
-                  <label htmlFor="sizePreference">Size Preference</label>
-                  <input
-                    id="sizePreference"
-                    type="text"
-                    name="sizePreference"
-                    placeholder="e.g. UK 12, Large, Custom"
-                    value={formData.sizePreference}
-                    onChange={handleChange}
-                  />
-                </div>
 
                 <div className="form-field">
                   <label htmlFor="quantity">Quantity</label>
@@ -312,96 +304,6 @@ export default function AsoEbi() {
                     <option value="Yes">Yes</option>
                     <option value="No - Fabric Only">No - Fabric Only</option>
                   </select>
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="bustChest">Bust / Chest</label>
-                  <input
-                    id="bustChest"
-                    type="text"
-                    name="bustChest"
-                    value={formData.bustChest}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="waist">Waist</label>
-                  <input
-                    id="waist"
-                    type="text"
-                    name="waist"
-                    value={formData.waist}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="hips">Hips</label>
-                  <input
-                    id="hips"
-                    type="text"
-                    name="hips"
-                    value={formData.hips}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="shoulder">Shoulder</label>
-                  <input
-                    id="shoulder"
-                    type="text"
-                    name="shoulder"
-                    value={formData.shoulder}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="sleeveLength">Sleeve Length</label>
-                  <input
-                    id="sleeveLength"
-                    type="text"
-                    name="sleeveLength"
-                    value={formData.sleeveLength}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="dressTopLength">Dress / Top Length</label>
-                  <input
-                    id="dressTopLength"
-                    type="text"
-                    name="dressTopLength"
-                    value={formData.dressTopLength}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="skirtTrouserLength">
-                    Skirt / Trouser Length
-                  </label>
-                  <input
-                    id="skirtTrouserLength"
-                    type="text"
-                    name="skirtTrouserLength"
-                    value={formData.skirtTrouserLength}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="height">Height</label>
-                  <input
-                    id="height"
-                    type="text"
-                    name="height"
-                    value={formData.height}
-                    onChange={handleChange}
-                  />
                 </div>
 
                 <div className="form-field form-field-full">
