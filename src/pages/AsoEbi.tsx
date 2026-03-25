@@ -10,16 +10,9 @@ type AsoEbiFormData = {
   category: string;
   outfitType: string;
   sizePreference: string;
-  quantity: number;
+  fabricQuantity: number;
+  geleQuantity: number;
   tailoringRequired: string;
-  bustChest: string;
-  waist: string;
-  hips: string;
-  shoulder: string;
-  sleeveLength: string;
-  dressTopLength: string;
-  skirtTrouserLength: string;
-  height: string;
   pickupOrDelivery: string;
   notes: string;
   botcheck: string;
@@ -32,16 +25,9 @@ const initialForm: AsoEbiFormData = {
   category: "",
   outfitType: "",
   sizePreference: "",
-  quantity: 1,
+  fabricQuantity: 1,
+  geleQuantity: 1,
   tailoringRequired: "Yes",
-  bustChest: "",
-  waist: "",
-  hips: "",
-  shoulder: "",
-  sleeveLength: "",
-  dressTopLength: "",
-  skirtTrouserLength: "",
-  height: "",
   pickupOrDelivery: "",
   notes: "",
   botcheck: "",
@@ -59,7 +45,10 @@ export default function AsoEbi() {
 
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "quantity" ? Number(value) || 1 : value,
+      [name]:
+  name === "fabricQuantity" || name === "geleQuantity"
+    ? Number(value) || 1
+    : value,
     }));
   }
 
@@ -251,16 +240,15 @@ export default function AsoEbi() {
                 </div>
 
                                 <div className="form-field">
-                  <label htmlFor="quantity">Quantity</label>
-                  <input
-                    id="quantity"
-                    type="number"
-                    name="quantity"
-                    min={1}
-                    value={formData.quantity}
-                    onChange={handleChange}
-                    required
-                  />
+<label htmlFor="fabricQuantity">Fabric Quantity</label>
+<input
+  id="fabricQuantity"
+  type="number"
+  name="fabricQuantity"
+  min={1}
+  value={formData.fabricQuantity}
+  onChange={handleChange}
+/>
                 </div>
 
                 <div className="form-field">
@@ -280,16 +268,15 @@ export default function AsoEbi() {
 
 
                 <div className="form-field">
-                  <label htmlFor="quantity">Quantity</label>
-                  <input
-                    id="quantity"
-                    type="number"
-                    name="quantity"
-                    min={1}
-                    value={formData.quantity}
-                    onChange={handleChange}
-                    required
-                  />
+<label htmlFor="geleQuantity">Gele Quantity</label>
+<input
+  id="geleQuantity"
+  type="number"
+  name="geleQuantity"
+  min={1}
+  value={formData.geleQuantity}
+  onChange={handleChange}
+/>
                 </div>
 
                 <div className="form-field">
